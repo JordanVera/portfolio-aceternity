@@ -1,51 +1,111 @@
-import Image from "next/image";
-import React from "react";
-import { Heading } from "./Heading";
-import { twMerge } from "tailwind-merge";
+import Image from 'next/image';
+import React from 'react';
+import { Heading } from './Heading';
+import { twMerge } from 'tailwind-merge';
 
 export const TechStack = () => {
   const stack = [
     {
-      title: "Next.js",
-      src: "/images/logos/next.png",
+      title: 'Next.js',
+      src: '/images/logos/nextjs.png',
 
-      className: "h-10 w-14",
+      className: 'h-10 w-10',
     },
     {
-      title: "AWS",
-      src: "/images/logos/aws.webp",
+      title: 'Bootstrap',
+      src: '/images/logos/bootstrap-colored.svg',
 
-      className: "h-10 w-10",
+      className: 'h-10 w-10',
     },
     {
-      title: "Figma",
-      src: "/images/logos/figma.png",
+      title: 'AWS',
+      src: '/images/logos/aws.webp',
 
-      className: "h-10 w-8",
+      className: 'h-10 w-10',
     },
     {
-      title: "Framer Motion",
-      src: "/images/logos/framer.webp",
+      title: 'Express',
+      src: '/images/logos/express-colored.svg',
 
-      className: "h-10 w-10",
+      className: 'h-10 w-10',
     },
     {
-      title: "Node",
-      src: "/images/logos/node.png",
+      title: 'Github',
+      src: '/images/logos/github.svg',
 
-      className: "h-10 w-12",
+      className: 'h-10 w-10',
     },
     {
-      title: "Tailwind",
-      src: "/images/logos/tailwind.png",
+      title: 'Heroku',
+      src: '/images/logos/heroku-colored.svg',
 
-      className: "h-10 w-24",
+      className: 'h-10 w-10',
     },
     {
-      title: "Vercel",
-      src: "/images/logos/vercel.png",
+      title: 'Html',
+      src: '/images/logos/html5-colored.svg',
 
-      className: "h-10 w-24",
+      className: 'h-10 w-10',
+    },
+    {
+      title: 'Java',
+      src: '/images/logos/java.png',
+
+      className: 'h-10 w-10',
+    },
+    {
+      title: 'Javascript',
+      src: '/images/logos/javascript.svg',
+
+      className: 'h-10 w-10',
+    },
+    {
+      title: 'Material UI',
+      src: '/images/logos/materialui-colored.svg',
+
+      className: 'h-10 w-10',
+    },
+    {
+      title: 'MongoDB',
+      src: '/images/logos/mongodb-colored.svg',
+
+      className: 'h-10 w-10',
+    },
+    {
+      title: 'Prisma',
+      src: '/images/logos/prisma.png',
+
+      className: 'h-10 w-16',
+    },
+    {
+      title: 'React',
+      src: '/images/logos/react-colored.svg',
+
+      className: 'h-10 w-10',
+    },
+    {
+      title: 'Redux',
+      src: '/images/logos/redux-colored.svg',
+
+      className: 'h-10 w-10',
+    },
+    {
+      title: 'Sass',
+      src: '/images/logos/sass-colored.svg',
+
+      className: 'h-10 w-10',
+    },
+    {
+      title: 'Spring Boot',
+      src: '/images/logos/spring-boot.png',
+
+      className: 'h-10 w-10',
+    },
+    {
+      title: 'Tailwind',
+      src: '/images/logos/tailwind.png',
+
+      className: 'h-10 w-10',
     },
   ];
   return (
@@ -64,7 +124,7 @@ export const TechStack = () => {
             width={`200`}
             height={`200`}
             alt={item.title}
-            className={twMerge("object-contain mr-4 mb-4", item.className)}
+            className={twMerge('object-contain mr-4 mb-4', item.className)}
           />
         ))}
       </div>
