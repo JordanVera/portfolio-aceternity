@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
-import localFont from "next/font/local";
-import { twMerge } from "tailwind-merge";
+import localFont from 'next/font/local';
+import { twMerge } from 'tailwind-merge';
 
 export const Paragraph = ({
   className,
@@ -13,7 +13,7 @@ export const Paragraph = ({
   return (
     <p
       className={twMerge(
-        "text-sm lg:text-base font-normal text-secondary",
+        'text-sm lg:text-base font-normal text-zinc-300',
         className
       )}
     >

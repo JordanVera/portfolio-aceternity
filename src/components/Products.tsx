@@ -1,12 +1,12 @@
-"use client";
-import React from "react";
-import { Heading } from "./Heading";
-import { Product } from "@/types/products";
-import { products } from "@/constants/products";
-import Link from "next/link";
-import Image from "next/image";
-import { Paragraph } from "./Paragraph";
-import { motion } from "framer-motion";
+'use client';
+import React from 'react';
+import { Heading } from './Heading';
+import { Product } from '@/types/products';
+import { products } from '@/constants/products';
+import Link from 'next/link';
+import Image from 'next/image';
+import { Paragraph } from './Paragraph';
+import { motion } from 'framer-motion';
 
 export const Products = () => {
   return (
@@ -28,7 +28,7 @@ export const Products = () => {
             <Link
               href={product.slug ? `/projects/${product.slug}` : product.href}
               key={product.href}
-              className="group flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 hover:bg-gray-50 rounded-2xl transition duration-200 pt-4"
+              className="group flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 hover:bg-zinc-800 rounded-2xl transition duration-200 pt-4"
             >
               <Image
                 src={product.thumbnail}
