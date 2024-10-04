@@ -1,13 +1,13 @@
-"use client";
-import { timeline } from "@/constants/timeline";
-import React from "react";
-import { Paragraph } from "./Paragraph";
-import { Heading } from "./Heading";
+'use client';
+import { timeline } from '@/constants/timeline';
+import React from 'react';
+import { Paragraph } from './Paragraph';
+import { Heading } from './Heading';
 import {
   IconCheck,
   IconCheckbox,
   IconCircleCheckFilled,
-} from "@tabler/icons-react";
+} from '@tabler/icons-react';
 
 export const WorkHistory = () => {
   return (
@@ -21,7 +21,7 @@ export const WorkHistory = () => {
           <div>
             <Heading
               as="h5"
-              className="text-lg md:text-lg lg:text-lg text-emerald-500"
+              className="text-lg md:text-lg lg:text-lg text-sky-500"
             >
               {item.company}
             </Heading>

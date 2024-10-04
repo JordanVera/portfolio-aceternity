@@ -71,7 +71,7 @@ export const Navigation = ({
           onClick={() => isMobile() && setOpen(false)}
           className={twMerge(
             'text-zinc-300 hover:text-white transition duration-200 flex items-center space-x-2 py-2 px-2 rounded-md text-sm',
-            isActive(link.href) && 'bg-zinc-700 shadow-lg text-white'
+            isActive(link.href) && 'bg-zinc-800 shadow-lg text-white'
           )}
         >
           <link.icon
