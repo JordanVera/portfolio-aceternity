@@ -1,11 +1,11 @@
-"use client";
-import { Product } from "@/types/products";
-import Image, { StaticImageData } from "next/image";
-import React, { useState } from "react";
-import { Heading } from "./Heading";
-import { Paragraph } from "./Paragraph";
-import Link from "next/link";
-import { motion } from "framer-motion";
+'use client';
+import { Product } from '@/types/products';
+import Image, { StaticImageData } from 'next/image';
+import React, { useState } from 'react';
+import { Heading } from './Heading';
+import { Paragraph } from './Paragraph';
+import Link from 'next/link';
+import { motion } from 'framer-motion';
 
 export const SingleProduct = ({ product }: { product: Product }) => {
   const [activeImage, setActiveImage] = useState<StaticImageData | string>(
@@ -35,7 +35,7 @@ export const SingleProduct = ({ product }: { product: Product }) => {
           width="1000"
           className="rounded-md object-contain"
         />
-        <div className="absolute bottom-0 bg-white h-40 w-full [mask-image:linear-gradient(to_bottom,transparent,white)]" />
+        <div className="absolute bottom-0 bg-zinc-900 h-40 w-full [mask-image:linear-gradient(to_bottom,transparent,black)]" />
       </motion.div>
       <div className="flex flex-row justify-center my-8 flex-wrap">
         {product.images.map((image, idx) => (

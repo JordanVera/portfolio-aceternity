@@ -1,14 +1,14 @@
-import { Container } from "@/components/Container";
-import { Heading } from "@/components/Heading";
-import { Highlight } from "@/components/Highlight";
-import { Paragraph } from "@/components/Paragraph";
-import { SingleProduct } from "@/components/Product";
-import { Products } from "@/components/Products";
-import { products } from "@/constants/products";
-import { Product } from "@/types/products";
-import { Metadata } from "next";
-import Image from "next/image";
-import { redirect } from "next/navigation";
+import { Container } from '@/components/Container';
+import { Heading } from '@/components/Heading';
+import { Highlight } from '@/components/Highlight';
+import { Paragraph } from '@/components/Paragraph';
+import { SingleProduct } from '@/components/Product';
+import { Products } from '@/components/Products';
+import { products } from '@/constants/products';
+import { Product } from '@/types/products';
+import { Metadata } from 'next';
+import Image from 'next/image';
+import { redirect } from 'next/navigation';
 
 type Props = {
   params: { slug: string };
@@ -24,9 +24,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   } else {
     return {
-      title: "Projects | John Doe",
+      title: 'Projects | Jordan Vera',
       description:
-        "John Doe is a developer, writer and speaker. He is a digital nomad and travels around the world while working remotely.",
+        'John Doe is a developer, writer and speaker. He is a digital nomad and travels around the world while working remotely.',
     };
   }
 }
@@ -40,7 +40,7 @@ export default function SingleProjectPage({
   const product = products.find((p) => p.slug === slug);
 
   if (!product) {
-    redirect("/projects");
+    redirect('/projects');
   }
   return (
     <Container>

@@ -41,7 +41,7 @@ export const Products = () => {
                 <div>
                   <Heading
                     as="h4"
-                    className="font-black text-lg md:text-lg lg:text-lg "
+                    className="font-black text-lg md:text-lg lg:text-lg"
                   >
                     {product.title}
                   </Heading>
@@ -53,7 +53,7 @@ export const Products = () => {
                   {product.stack?.map((stack: string) => (
                     <span
                       key={stack}
-                      className="text-xs  md:text-xs lg:text-xs bg-gray-50 px-2 py-1 rounded-sm text-secondary"
+                      className="text-xs  md:text-xs lg:text-xs bg-zinc-700 px-2 py-1 rounded-sm text-white"
                     >
                       {stack}
                     </span>
