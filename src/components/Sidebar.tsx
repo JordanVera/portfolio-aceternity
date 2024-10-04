@@ -10,7 +10,7 @@ import { Heading } from './Heading';
 import { socials } from '@/constants/socials';
 import { Badge } from './Badge';
 import { AnimatePresence, motion } from 'framer-motion';
-import { IconLayoutSidebarRightCollapse } from '@tabler/icons-react';
+import { IconMenu } from '@tabler/icons-react';
 import { isMobile } from '@/lib/utils';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 
@@ -44,10 +44,10 @@ export const Sidebar = () => {
         )}
       </AnimatePresence>
       <button
-        className="fixed lg:hidden bottom-4 right-4 h-8 w-8 border border-neutral-200 rounded-full backdrop-blur-sm flex items-center justify-center z-50"
+        className="fixed lg:hidden top-4 right-6 h-8 w-8 rounded-full backdrop-blur-sm flex items-center justify-center z-50"
         onClick={() => setOpen(!open)}
       >
-        <IconLayoutSidebarRightCollapse className="h-4 w-4 text-secondary" />
+        <IconMenu className="h-6 w-6 text-white" />
       </button>
     </>
   );
