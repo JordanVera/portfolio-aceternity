@@ -8,63 +8,63 @@ export const TechStack = () => {
     {
       title: 'Javascript',
       src: '/images/logos/javascript.svg',
-
+      link: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript',
       className: 'h-10 w-10',
     },
     {
       title: 'React',
       src: '/images/logos/react-colored.svg',
-
+      link: 'https://react.dev/',
       className: 'h-10 w-10',
     },
     {
       title: 'Redux',
       src: '/images/logos/redux-colored.svg',
-
+      link: 'https://redux.js.org/',
       className: 'h-10 w-10',
     },
     {
       title: 'Next.js',
       src: '/images/logos/nextjs.png',
-
+      link: 'https://nextjs.org/',
       className: 'h-10 w-10',
     },
     {
       title: 'Vite',
       src: 'https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/vite-colored.svg',
-
+      link: 'https://vitejs.dev/',
       className: 'h-10 w-10',
     },
     {
       title: 'Sass',
       src: '/images/logos/sass-colored.svg',
-
+      link: 'https://sass-lang.com/',
       className: 'h-10 w-10',
     },
     {
       title: 'Tailwind',
       src: '/images/logos/tailwind.png',
-
+      link: 'https://tailwindcss.com/',
       className: 'h-10 w-10',
     },
     {
       title: 'Bootstrap',
       src: '/images/logos/bootstrap-colored.svg',
-
+      link: 'https://getbootstrap.com/',
       className: 'h-10 w-10',
     },
 
     {
       title: 'Html',
       src: '/images/logos/html5-colored.svg',
-
+      link: 'https://developer.mozilla.org/en-US/docs/Web/HTML',
       className: 'h-10 w-10',
     },
 
     {
       title: 'Material UI',
       src: '/images/logos/materialui-colored.svg',
-
+      link: 'https://mui.com/',
       className: 'h-10 w-10',
     },
   ];
@@ -136,15 +136,10 @@ export const TechStack = () => {
 
       className: 'h-10 w-10',
     },
-    {
-      title: 'Github',
-      src: 'https://res.cloudinary.com/dwa1jtluu/image/upload/q_auto,f_auto/v1653464815/kenjimmy.me/github_cctzbu.png',
 
-      className: 'h-10 w-10',
-    },
     {
       title: 'Docker',
-      src: 'https://res.cloudinary.com/dwa1jtluu/image/upload/q_auto,f_auto/v1653464815/kenjimmy.me/github_cctzbu.png',
+      src: 'https://res.cloudinary.com/dwa1jtluu/image/upload/q_auto,f_auto/v1653462522/kenjimmy.me/kisspng-using-docker-developing-and-deploying-software-wi-poznaj-aplikacjdocker-drupal-w-15-minut-docke-5b81de1974da70.1534794815352376574786_dcdmie.png',
 
       className: 'h-10 w-10',
     },
@@ -166,6 +161,18 @@ export const TechStack = () => {
 
       className: 'h-10 w-10',
     },
+    {
+      title: 'Webpack',
+      src: 'https://res.cloudinary.com/dwa1jtluu/image/upload/q_auto,f_auto/v1653464819/kenjimmy.me/webpack_xjsy5q.png',
+
+      className: 'h-10 w-10',
+    },
+    {
+      title: 'Postman',
+      src: 'https://res.cloudinary.com/dwa1jtluu/image/upload/q_auto,f_auto/v1653464818/kenjimmy.me/postman_thyot5.png',
+
+      className: 'h-10 w-10',
+    },
   ];
 
   return (
@@ -178,31 +185,61 @@ export const TechStack = () => {
       </Heading>
       <section>
         <h3 className="text-sm font-bold text-white">Front End</h3>
-        <div className="flex flex-wrap">
+        <div className="flex flex-wrap gap-4">
           {frontEnd.map((item) => (
-            <Image
-              src={item.src}
+            <a
               key={item.src}
-              width={`200`}
-              height={`200`}
-              alt={item.title}
-              className={twMerge('object-contain mr-4 mb-4', item.className)}
-            />
+              href={item.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:scale-110 transition-all duration-300 ease-in-out hover:cursor-pointer"
+            >
+              <Image
+                src={item.src}
+                width={`200`}
+                height={`200`}
+                alt={item.title}
+                className={twMerge('object-contain mr-4 mb-4', item.className)}
+              />
+            </a>
           ))}
         </div>
       </section>
       <section>
         <h3 className="text-sm font-bold text-white">Back End</h3>
-        <div className="flex flex-wrap">
+        <div className="flex flex-wrap gap-4">
           {backEnd.map((item) => (
-            <Image
-              src={item.src}
+            <a
               key={item.src}
-              width={`200`}
-              height={`200`}
-              alt={item.title}
-              className={twMerge('object-contain mr-4 mb-4', item.className)}
-            />
+              className="hover:scale-110 transition-all duration-300 ease-in-out hover:cursor-pointer"
+            >
+              <Image
+                src={item.src}
+                width={`200`}
+                height={`200`}
+                alt={item.title}
+                className={twMerge('object-contain mr-4 mb-4', item.className)}
+              />
+            </a>
+          ))}
+        </div>
+      </section>
+      <section>
+        <h3 className="text-sm font-bold text-white">Others</h3>
+        <div className="flex flex-wrap gap-4">
+          {others.map((item) => (
+            <a
+              key={item.src}
+              className="hover:scale-110 transition-all duration-300 ease-in-out hover:cursor-pointer"
+            >
+              <Image
+                src={item.src}
+                width={`200`}
+                height={`200`}
+                alt={item.title}
+                className={twMerge('object-contain mr-4 mb-4', item.className)}
+              />
+            </a>
           ))}
         </div>
       </section>
