@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   title: 'Projects | Jordan Vera',
   description:
     'John Doe is a developer, writer and speaker. He is a digital nomad and travels around the world while working remotely.',
+  icons: {
+    icon: '/images/logoWhite.svg',
+  },
 };
 
 export default function Projects() {

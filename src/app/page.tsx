@@ -5,6 +5,16 @@ import { Paragraph } from '@/components/Paragraph';
 import { Products } from '@/components/Products';
 import { TechStack } from '@/components/TechStack';
 import Image from 'next/image';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Jordan Vera - Developer',
+  description:
+    'John Doe is a developer, writer and speaker. He is a digital nomad and travels around the world while working remotely.',
+  icons: {
+    icon: '/images/logoWhite.svg',
+  },
+};
 
 export default function Home() {
   return (

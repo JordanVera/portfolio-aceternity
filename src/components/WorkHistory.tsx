@@ -3,11 +3,7 @@ import { timeline } from '@/constants/timeline';
 import React from 'react';
 import { Paragraph } from './Paragraph';
 import { Heading } from './Heading';
-import {
-  IconCheck,
-  IconCheckbox,
-  IconCircleCheckFilled,
-} from '@tabler/icons-react';
+import { IconCircleCheckFilled } from '@tabler/icons-react';
 
 export const WorkHistory = () => {
   return (
