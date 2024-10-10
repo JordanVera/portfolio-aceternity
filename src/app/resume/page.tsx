@@ -6,6 +6,7 @@ import { Products } from '@/components/Products';
 import { WorkHistory } from '@/components/WorkHistory';
 import Image from 'next/image';
 import { Metadata } from 'next';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Resume | Jordan Vera',
@@ -28,9 +29,14 @@ export default function Home() {
       </Paragraph>
       <WorkHistory />
 
-      <button className="text-black font-bold bg-gradient-to-r from-pink-500 via-yellow-400 to-cyan-400 w-full p-2 rounded-lg ">
-        Download Resume
-      </button>
+      <Link
+        href="/webDevResume.pdf"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-block text-center text-black font-bold bg-gradient-to-r from-pink-500 via-yellow-400 to-cyan-400 w-full p-2 rounded-lg hover:opacity-90 transition-opacity"
+      >
+        Download Full Resume
+      </Link>
     </Container>
   );
 }

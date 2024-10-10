@@ -1,12 +1,3 @@
-import sidefolioAceternity from 'public/images/sidefolio-aceternity-2.png';
-import sidefolioAceternity2 from 'public/images/sidefolio-aceternity-2.png';
-import sidefolioAlgochurn from 'public/images/sidefolio-algochurn.png';
-import sidefolioAlgochurn2 from 'public/images/sidefolio-algochurn.png';
-import sidefolioMoonbeam from 'public/images/sidefolio-moonbeam.png';
-import sidefolioMoonbeam2 from 'public/images/sidefolio-moonbeam-2.png';
-import sidefolioTailwindMasterKit from 'public/images/sidefolio-tailwindmasterkit.png';
-import sidefolioTailwindMasterKit2 from 'public/images/sidefolio-tailwindmasterkit-2.png';
-
 import v2 from 'public/images/projects/v2.png';
 import JordanGPT from 'public/images/projects/JordanGPT.png';
 import dictionary from 'public/images/projects/dictionary.png';
@@ -49,7 +40,7 @@ export const products = [
     description:
       'A replica of the popular LLM AI model, chatGPT, built with Vite, Node.js, and mySQL.',
     thumbnail: JordanGPT,
-    images: [sidefolioAlgochurn, sidefolioAlgochurn2],
+    images: [JordanGPT, JordanGPT],
     stack: ['Vite', 'Tailwindcss', 'Nodejs', 'mySQL'],
     slug: 'jordan-gpt',
     content: (
@@ -79,7 +70,7 @@ export const products = [
     description:
       'A simple dictionaty application built with Vite and Tailwindcss.',
     thumbnail: dictionary,
-    images: [sidefolioMoonbeam, sidefolioMoonbeam2],
+    images: [dictionary, dictionary],
     stack: ['Vite', 'Tailwindcss'],
     slug: 'dictionary',
     content: (
@@ -109,7 +100,7 @@ export const products = [
     description:
       'A beautiful and comprehensive Tailwind CSS components library for building modern websites and applications.',
     thumbnail: rps,
-    images: [sidefolioTailwindMasterKit, sidefolioTailwindMasterKit2],
+    images: [rps, rps],
     stack: ['Vite', 'Tailwindcss'],
     slug: 'rock-paper-scissors',
     content: (
