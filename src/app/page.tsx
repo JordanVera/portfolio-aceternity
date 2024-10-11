@@ -22,10 +22,10 @@ export default function Home() {
       <span className="text-4xl">👋</span>
       <Heading className="font-black">Hello there! I&apos;m Jordan</Heading>
       <Paragraph className="max-w-xl mt-4">
-        Hi, I'm Jordan Vera, a passionate software engineer with a knack for
-        creating simple solutions through code. I thrive on the excitement of
-        bringing ideas to life and transforming them into tangible, functional
-        products.
+        Hi, I&apos;m Jordan Vera, a passionate software engineer with a knack
+        for creating simple solutions through code. I thrive on the excitement
+        of bringing ideas to life and transforming them into tangible,
+        functional products.
       </Paragraph>
       <Paragraph className="max-w-xl mt-4">
         Beyond coding, I like listening to live music, traveling, and watching

@@ -57,11 +57,11 @@ export default function About() {
         </Paragraph>
 
         <Paragraph className=" mt-4">
-          I invite you to explore my website's projects section, where you'll
-          find my standout creations. Among them, I am particularly proud of PGA
-          Alpha and NFL Last Longer, which I consider to be my featured
-          projects. These applications have been the focal point of my efforts
-          and have allowed me to showcase my skills and dedication.
+          I invite you to explore my website&apos;s projects section, where
+          you&apos;ll find my standout creations. Among them, I am particularly
+          proud of PGA Alpha and NFL Last Longer, which I consider to be my
+          featured projects. These applications have been the focal point of my
+          efforts and have allowed me to showcase my skills and dedication.
         </Paragraph>
         <Paragraph className=" mt-4">
           Thank you for taking the time to learn more about me. I am eager to
