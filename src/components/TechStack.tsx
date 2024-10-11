@@ -196,6 +196,7 @@ export const TechStack = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="hover:scale-110 transition-all duration-300 ease-in-out hover:cursor-pointer"
+              title={item.title} // Add this
             >
               <Image
                 src={item.src}
@@ -218,6 +219,7 @@ export const TechStack = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="hover:scale-110 transition-all duration-300 ease-in-out hover:cursor-pointer"
+              title={item.title} // Add this line
             >
               <Image
                 src={item.src}
@@ -240,6 +242,7 @@ export const TechStack = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="hover:scale-110 transition-all duration-300 ease-in-out hover:cursor-pointer"
+              title={item.title} // Add this
             >
               <Image
                 src={item.src}
