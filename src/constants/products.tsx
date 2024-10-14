@@ -28,15 +28,16 @@ export const products = [
           season.
         </p>
         <p>
-          What sets NFL Last Longer apart is its focus on the "survivor" format,
-          challenging participants to select one winning team each week without
-          repeating picks. This format adds an extra layer of excitement and
-          strategy to traditional fantasy football, as users must carefully
-          consider not just weekly matchups, but also preserve strong teams for
-          later in the season. The application leverages Next.js's server-side
-          rendering capabilities to provide real-time updates, ensuring that
-          users always have access to the latest stats and information to inform
-          their decisions.
+          What sets NFL Last Longer apart is its focus on the
+          &quot;survivor&quot; format, challenging participants to select one
+          winning team each week without repeating picks. This format adds an
+          extra layer of excitement and strategy to traditional fantasy
+          football, as users must carefully consider not just weekly matchups,
+          but also preserve strong teams for later in the season. The
+          application leverages Next.js&apos;s server-side rendering
+          capabilities to provide real-time updates, ensuring that users always
+          have access to the latest stats and information to inform their
+          decisions.
         </p>
       </div>
     ),
@@ -67,11 +68,11 @@ export const products = [
           core functionality, allowing users to engage in natural language
           conversations with an AI. While it does use the actual GPT model, it
           serves as an impressive technical showcase, highlighting the
-          developer's proficiency in full-stack development, API integration,
-          and user interface design. Jordan GPT stands as a testament to the
-          power of modern web technologies and the potential for creating
-          sophisticated, AI-driven applications using open-source tools and
-          frameworks.
+          developer&apos;s proficiency in full-stack development, API
+          integration, and user interface design. Jordan GPT stands as a
+          testament to the power of modern web technologies and the potential
+          for creating sophisticated, AI-driven applications using open-source
+          tools and frameworks.
         </p>
       </div>
     ),
@@ -108,7 +109,7 @@ export const products = [
           allows users to hear the correct pronunciation, making it an excellent
           tool for both native speakers and language learners. This combination
           of visual and auditory information creates a comprehensive reference
-          tool that's both practical and engaging.
+          tool that&apos;s both practical and engaging.
         </p>
       </div>
     ),
@@ -126,12 +127,12 @@ export const products = [
       <div className="text-white">
         <p>
           Rock, Paper, Scissors is a classic game brought to life in the digital
-          realm, serving as a milestone project in the developer's journey.
+          realm, serving as a milestone project in the developer&apos;s journey.
           Built with Vite for optimal performance and styled with Tailwind CSS
           for a clean, modern look, this game offers a simple yet engaging
-          experience for users of all ages. As the developer's first foray into
-          game development, it showcases fundamental programming concepts and
-          user interface design principles, making it a testament to the
+          experience for users of all ages. As the developer&apos;s first foray
+          into game development, it showcases fundamental programming concepts
+          and user interface design principles, making it a testament to the
           learning process and growth in web development skills.
         </p>
         <p>
@@ -164,12 +165,12 @@ export const products = [
           REST Countries is an innovative web application that serves as a
           comprehensive database of nations worldwide. Built with Vite for
           optimal performance and styled with Tailwind CSS for a sleek, modern
-          interface, this project showcases the developer's ability to integrate
-          external APIs and create engaging user experiences. By leveraging a
-          robust country data API, the application provides users with a wealth
-          of information about every country on the globe, making it an
-          invaluable resource for students, travelers, and anyone curious about
-          the world's nations.
+          interface, this project showcases the developer&apos;s ability to
+          integrate external APIs and create engaging user experiences. By
+          leveraging a robust country data API, the application provides users
+          with a wealth of information about every country on the globe, making
+          it an invaluable resource for students, travelers, and anyone curious
+          about the world&apos;s nations.
         </p>
         <p>
           What sets REST Countries apart is its unique front-end design, which
