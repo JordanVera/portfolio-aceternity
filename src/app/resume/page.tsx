@@ -7,6 +7,7 @@ import { WorkHistory } from '@/components/WorkHistory';
 import Image from 'next/image';
 import { Metadata } from 'next';
 import Link from 'next/link';
+import { TechStack } from '@/components/TechStack';
 
 export const metadata: Metadata = {
   title: 'Resume | Jordan Vera',
@@ -28,7 +29,6 @@ export default function Home() {
         millions of lives
       </Paragraph>
       <WorkHistory />
-
       <Link
         href="/webDevResume.pdf"
         target="_blank"
@@ -37,6 +37,7 @@ export default function Home() {
       >
         Download Full Resume
       </Link>
+      <TechStack />
     </Container>
   );
 }
