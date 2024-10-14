@@ -45,22 +45,33 @@ export const Sidebar = () => {
     <>
       <AnimatePresence>
         {open && (
-          <motion.div
-            ref={sidebarRef}
-            initial={{ x: -200 }}
-            animate={{ x: 0 }}
-            transition={{ duration: 0.2, ease: 'linear' }}
-            exit={{ x: -200 }}
-            className="px-6 bg-black z-[100] py-10  max-w-[14rem] lg:w-fit  fixed lg:relative  h-screen left-0 flex flex-col justify-between"
-          >
-            <div className="flex-1 overflow-auto">
-              <SidebarHeader />
-              <Navigation setOpen={setOpen} />
-            </div>
-            <div onClick={() => isMobile() && setOpen(false)}>
-              <Badge href="/resume" text="Read Resume" />
-            </div>
-          </motion.div>
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[90] lg:hidden"
+              onClick={() => !isLargeScreen && setOpen(false)}
+            />
+
+            <motion.div
+              ref={sidebarRef}
+              initial={{ x: -200 }}
+              animate={{ x: 0 }}
+              transition={{ duration: 0.2, ease: 'linear' }}
+              exit={{ x: -200 }}
+              className="px-6 bg-black z-[100] py-10  max-w-[14rem] lg:w-fit  fixed lg:relative  h-screen left-0 flex flex-col justify-between"
+            >
+              <div className="flex-1 overflow-auto">
+                <SidebarHeader />
+                <Navigation setOpen={setOpen} />
+              </div>
+              <div onClick={() => isMobile() && setOpen(false)}>
+                <Badge href="/resume" text="Read Resume" />
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
       <button
