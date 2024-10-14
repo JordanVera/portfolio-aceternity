@@ -187,7 +187,7 @@ export const TechStack = () => {
         Tech Stack
       </Heading>
       <section>
-        <h3 className="text-sm font-bold text-white">Front End</h3>
+        <h3 className="text-sm font-semibold text-white mb-2">Front End</h3>
         <div className="flex flex-wrap gap-4">
           {frontEnd.map((item) => (
             <a
@@ -210,7 +210,7 @@ export const TechStack = () => {
         </div>
       </section>
       <section>
-        <h3 className="text-sm font-bold text-white">Back End</h3>
+        <h3 className="text-sm font-semibold text-white mb-2">Back End</h3>
         <div className="flex flex-wrap gap-4">
           {backEnd.map((item) => (
             <a
@@ -233,7 +233,7 @@ export const TechStack = () => {
         </div>
       </section>
       <section>
-        <h3 className="text-sm font-bold text-white">Others</h3>
+        <h3 className="text-sm font-semibold text-white mb-2">Others</h3>
         <div className="flex flex-wrap gap-4">
           {others.map((item) => (
             <a

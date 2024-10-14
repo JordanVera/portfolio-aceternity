@@ -15,6 +15,7 @@ const defaultFormState = {
     error: '',
   },
 };
+
 export const Contact = () => {
   const [formData, setFormData] = useState(defaultFormState);
   const [submitted, setSubmitted] = useState(false);
