@@ -44,7 +44,7 @@ export const Sidebar = () => {
         )}
       </AnimatePresence>
       <button
-        className="fixed lg:hidden top-4 right-6 h-8 w-8 rounded-full backdrop-blur-sm flex items-center justify-center z-50"
+        className="fixed lg:hidden top-4 left-4 h-8 w-8 rounded-full backdrop-blur-sm flex items-center justify-center z-50"
         onClick={() => setOpen(!open)}
       >
         <IconMenu className="h-6 w-6 text-white" />
