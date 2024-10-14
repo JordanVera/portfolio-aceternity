@@ -4,7 +4,7 @@ import { Navlink } from '@/types/navlink';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { Heading } from './Heading';
 import { socials } from '@/constants/socials';
@@ -17,16 +17,36 @@ import { useMediaQuery } from '@/hooks/useMediaQuery';
 export const Sidebar = () => {
   const isLargeScreen = useMediaQuery('(min-width: 1024px)');
   const [open, setOpen] = useState(isLargeScreen);
+  const sidebarRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setOpen(isLargeScreen);
   }, [isLargeScreen]);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        !isLargeScreen &&
+        open &&
+        sidebarRef.current &&
+        !sidebarRef.current.contains(event.target as Node)
+      ) {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isLargeScreen, open]);
 
   return (
     <>
       <AnimatePresence>
         {open && (
           <motion.div
+            ref={sidebarRef}
             initial={{ x: -200 }}
             animate={{ x: 0 }}
             transition={{ duration: 0.2, ease: 'linear' }}

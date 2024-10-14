@@ -65,8 +65,8 @@ export const products = [
         <p>
           This clone not only mimics the look of ChatGPT but also replicates its
           core functionality, allowing users to engage in natural language
-          conversations with an AI. While it doesn't use the actual GPT model,
-          it serves as an impressive technical showcase, highlighting the
+          conversations with an AI. While it does use the actual GPT model, it
+          serves as an impressive technical showcase, highlighting the
           developer's proficiency in full-stack development, API integration,
           and user interface design. Jordan GPT stands as a testament to the
           power of modern web technologies and the potential for creating
