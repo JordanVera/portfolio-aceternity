@@ -1,8 +1,20 @@
 export const timeline = [
   {
+    company: 'The Lighthouse Church',
+    title: 'Full Stack Developer',
+    date: '2025 - Present',
+    description: 'Building the future of interactive digital publications',
+    responsibilities: [
+      'Manage and build out the internal church website',
+      'Manage customer facing website and mobile apps',
+      'Introduced and implemented Nextjs and Tailwindcss for the customer facing website',
+      'Engineered RESTful API services using Node.js, Express, and Nextjs v15',
+    ],
+  },
+  {
     company: 'Digital Publishing Inc.',
     title: 'Full Stack Developer',
-    date: '2023 - Present',
+    date: '2023 - 2025',
     description: 'Building the future of interactive digital publications',
     responsibilities: [
       'Refactored Book Reader Application from CRA to Nextjs',
