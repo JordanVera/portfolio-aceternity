@@ -4,7 +4,23 @@ import Image from 'next/image';
 
 import { motion } from 'framer-motion';
 
+function getAge(birthDate: Date): number {
+  const today = new Date();
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const hasBirthdayPassedThisYear =
+    today.getMonth() > birthDate.getMonth() ||
+    (today.getMonth() === birthDate.getMonth() &&
+      today.getDate() >= birthDate.getDate());
+
+  if (!hasBirthdayPassedThisYear) {
+    age--;
+  }
+
+  return age;
+}
+
 export default function About() {
+  const age = getAge(new Date(1996, 3, 24));
   const images = [
     '/images/selfie.jpg',
     '/images/texas.jpg',
@@ -42,7 +58,7 @@ export default function About() {
 
       <div className="max-w-4xl">
         <Paragraph className=" mt-4">
-          My name is Jordan Vera, I am a 26 year old fullstack web developer
+          My name is Jordan Vera, I am a {age} year old fullstack web developer
           from Houston, TX. I am a very ambitious person and really love the
           world of web dev and tech.
         </Paragraph>
