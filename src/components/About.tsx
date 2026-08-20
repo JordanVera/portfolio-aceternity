@@ -3,7 +3,7 @@ import { Paragraph } from '@/components/Paragraph';
 import { ElectricBorder } from '@/components/ElectricBorder';
 import Image from 'next/image';
 
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 
 function getAge(birthDate: Date): number {
   const today = new Date();

@@ -4,7 +4,7 @@ import Image, { StaticImageData } from 'next/image';
 import React, { useState } from 'react';
 import { Heading } from './Heading';
 import { Paragraph } from './Paragraph';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 
 export const SingleProduct = ({ product }: { product: Product }) => {
   const [activeImage, setActiveImage] = useState<StaticImageData | string>(

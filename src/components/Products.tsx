@@ -6,7 +6,7 @@ import { products } from '@/constants/products';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Paragraph } from './Paragraph';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 
 export const Products = () => {
   return (
