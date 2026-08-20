@@ -47,9 +47,16 @@ export const ElectricBorder: React.FC<ElectricBorderProps> = ({
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const glowRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<number | null>(null);
   const timeRef = useRef(0);
   const lastFrameTimeRef = useRef(0);
+  const chaosTargetRef = useRef(chaos);
+  const chaosCurrentRef = useRef(chaos);
+
+  useEffect(() => {
+    chaosTargetRef.current = chaos;
+  }, [chaos]);
 
   const random = useCallback((x: number): number => {
     return (Math.sin(x * 12.9898) * 43758.5453) % 1;
@@ -247,11 +254,11 @@ export const ElectricBorder: React.FC<ElectricBorderProps> = ({
     const octaves = 10;
     const lacunarity = 1.6;
     const gain = 0.7;
-    const amplitude = chaos;
     const frequency = 10;
     const baseFlatness = 0;
     const displacement = 60;
     const borderOffset = 60;
+    const restChaos = 0.008;
 
     const updateSize = () => {
       const rect = container.getBoundingClientRect();
@@ -276,6 +283,19 @@ export const ElectricBorder: React.FC<ElectricBorderProps> = ({
       const deltaTime = (currentTime - lastFrameTimeRef.current) / 1000;
       timeRef.current += deltaTime * speed;
       lastFrameTimeRef.current = currentTime;
+
+      chaosCurrentRef.current +=
+        (chaosTargetRef.current - chaosCurrentRef.current) *
+        Math.min(1, deltaTime * 8);
+      const amplitude = chaosCurrentRef.current;
+
+      if (glowRef.current) {
+        const intensity = Math.min(
+          1,
+          Math.max(0, (amplitude - restChaos) / (0.03 - restChaos)),
+        );
+        glowRef.current.style.opacity = String(0.35 + intensity * 0.65);
+      }
 
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       ctx.setTransform(1, 0, 0, 1, 0, 0);
@@ -371,7 +391,6 @@ export const ElectricBorder: React.FC<ElectricBorderProps> = ({
     active,
     color,
     speed,
-    chaos,
     borderRadius,
     octavedNoise,
     getRoundedRectPoint,
@@ -398,8 +417,9 @@ export const ElectricBorder: React.FC<ElectricBorderProps> = ({
         <canvas ref={canvasRef} className="block" />
       </div>
       <div
-        className="pointer-events-none absolute inset-0 z-[1] rounded-[inherit] transition-opacity duration-300"
-        style={{ opacity: active ? 1 : 0 }}
+        ref={glowRef}
+        className="pointer-events-none absolute inset-0 z-[1] rounded-[inherit]"
+        style={{ opacity: active ? 0.35 : 0 }}
       >
         <div
           className="pointer-events-none absolute inset-0 rounded-[inherit]"
