@@ -1,13 +1,13 @@
 'use client';
 import { navlinks } from '@/constants/navlinks';
 import { Navlink } from '@/types/navlink';
-import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React, { useState, useEffect, useRef } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { Heading } from './Heading';
 import { socials } from '@/constants/socials';
+import { Avatar } from './Avatar';
 import { Badge } from './Badge';
 import { AnimatePresence, motion } from 'framer-motion';
 import { IconMenu } from '@tabler/icons-react';
@@ -102,13 +102,13 @@ export const Navigation = ({
           onClick={() => isMobile() && setOpen(false)}
           className={twMerge(
             'text-zinc-300 hover:text-white transition duration-200 flex items-center space-x-2 py-2 px-2 rounded-md text-sm',
-            isActive(link.href) && 'bg-zinc-800 shadow-lg text-white'
+            isActive(link.href) && 'bg-zinc-800 shadow-lg text-white',
           )}
         >
           <link.icon
             className={twMerge(
               'h-4 w-4 flex-shrink-0',
-              isActive(link.href) && 'text-sky-500'
+              isActive(link.href) && 'text-sky-500',
             )}
           />
           <span>{link.label}</span>
@@ -125,13 +125,13 @@ export const Navigation = ({
           target="_blank"
           rel="noopener noreferrer"
           className={twMerge(
-            'text-secondary hover:text-primary transition duration-200 flex items-center space-x-2 py-2 px-2 rounded-md text-sm'
+            'text-secondary hover:text-primary transition duration-200 flex items-center space-x-2 py-2 px-2 rounded-md text-sm',
           )}
         >
           <link.icon
             className={twMerge(
               'h-4 w-4 flex-shrink-0',
-              isActive(link.href) && 'text-sky-500'
+              isActive(link.href) && 'text-sky-500',
             )}
           />
           <span>{link.label}</span>
@@ -143,14 +143,8 @@ export const Navigation = ({
 
 const SidebarHeader = () => {
   return (
-    <div className="flex space-x-2">
-      <Image
-        src="/images/selfie2.png"
-        alt="Avatar"
-        height="40"
-        width="40"
-        className="object-cover object-top rounded-full flex-shrink-0 bg-zinc-700"
-      />
+    <div className="flex items-center space-x-2">
+      <Avatar src="/images/avatar.png" alt="Jordan Vera" size={60} />
       <div className="flex text-sm flex-col">
         <p className="font-bold text-white">Jordan Vera</p>
         <p className="font-light text-zinc-300">Web Developer</p>
