@@ -4,7 +4,7 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { Heading } from "./Heading";
 import { Paragraph } from "./Paragraph";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
 
 export const Blogs = ({ blogs }: { blogs: Blog[] }) => {

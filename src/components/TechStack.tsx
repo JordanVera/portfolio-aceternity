@@ -12,9 +12,27 @@ export const TechStack = () => {
       className: 'h-10 w-10',
     },
     {
+      title: 'TypeScript',
+      src: '/images/logos/typescript-colored.svg',
+      link: 'https://www.typescriptlang.org/',
+      className: 'h-10 w-10',
+    },
+    {
       title: 'React',
       src: '/images/logos/react-colored.svg',
       link: 'https://react.dev/',
+      className: 'h-10 w-10',
+    },
+    {
+      title: 'React Native',
+      src: '/images/logos/react-native.svg',
+      link: 'https://reactnative.dev/',
+      className: 'h-10 w-10',
+    },
+    {
+      title: 'Expo.js',
+      src: '/images/logos/expo.svg',
+      link: 'https://expo.dev/',
       className: 'h-10 w-10',
     },
     {
