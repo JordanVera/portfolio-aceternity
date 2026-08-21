@@ -8,6 +8,7 @@ export const travelMedia: TravelMedia[] = [
   { src: '/images/travel/IMG_2934.mov', type: 'video' },
   { src: '/images/travel/IMG_3865.JPG', type: 'image' },
   { src: '/images/travel/IMG_2541.jpg', type: 'image' },
+  { src: '/images/paris.jpg', type: 'image' },
   { src: '/images/travel/IMG_0022.jpg', type: 'image' },
   { src: '/images/travel/FullSizeRender.jpg', type: 'image' },
   { src: '/images/travel/IMG_2978.MOV', type: 'video' },
