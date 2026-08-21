@@ -33,12 +33,11 @@ export default function Home() {
       <Paragraph className="mt-4 max-w-xl">
         I&apos;m a fullstack developer in Houston building products like{' '}
         <Highlight>Legendary Barber Competition</Highlight> and{' '}
-        <Highlight>Exterior Pro Stack</Highlight> — branded sites, web,
-        native, and the APIs underneath.
+        <Highlight>Exterior Pro Stack</Highlight> — branded sites, web, native,
+        and the APIs underneath.
       </Paragraph>
       <Paragraph className="mt-4 max-w-xl">
-        Beyond the keyboard I like live music, traveling, and the Kansas City
-        Chiefs.
+        Beyond the keyboard I like live music, traveling, and LSU football.
       </Paragraph>
 
       <div className="mt-8 flex flex-wrap items-center gap-4">
