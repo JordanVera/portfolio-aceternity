@@ -95,6 +95,12 @@ export const TechStack = () => {
       className: 'h-10 w-10',
     },
     {
+      title: 'tRPC',
+      src: '/images/logos/trpc.svg',
+      link: 'https://trpc.io/',
+      className: 'h-10 w-10',
+    },
+    {
       title: 'Express',
       src: '/images/logos/express-colored.svg',
       link: 'https://expressjs.com/',

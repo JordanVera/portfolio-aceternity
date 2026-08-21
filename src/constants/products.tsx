@@ -4,8 +4,42 @@ import dictionary from 'public/images/projects/dictionary.png';
 import rps from 'public/images/projects/rps.png';
 import countries from 'public/images/projects/countries.png';
 import pomodoro from 'public/images/projects/pomodoro.png';
+import exteriorProStack from 'public/images/projects/exterior-pro-stack.png';
 
 export const products = [
+  {
+    href: 'https://exterior-pro-stack.vercel.app/',
+    title: 'Exterior Pro Stack',
+    description:
+      'A two-sided marketplace for recurring exterior care and on-demand jobs, spanning web, native, and Stripe-powered payouts.',
+    thumbnail: exteriorProStack,
+    images: [exteriorProStack, exteriorProStack],
+    stack: ['Nextjs', 'Expo', 'tRPC', 'Prisma', 'Stripe'],
+    slug: 'exterior-pro-stack',
+    content: (
+      <div className="text-white">
+        <p>
+          Exterior Pro Stack is a two-sided platform for everything outside the
+          walls: lawn care, gutter cleaning, pressure washing, and related
+          services. Homeowners and property managers can subscribe to a
+          recurring plan with the same verified crew, or post a one-time job
+          and let local providers compete on price. The company is merchant of
+          record, so customers pay through the platform, funds are held until
+          the visit is complete, and independent crews get paid via Stripe
+          Connect.
+        </p>
+        <p>
+          The product is a Turborepo monorepo rather than a single app. Next.js
+          powers the marketing site plus customer, provider, and admin portals.
+          Expo and React Native cover the homeowner and field-crew apps, with
+          a shared tRPC API, Prisma on MySQL, Vercel Blob for job photos, and
+          Twilio for SMS updates. That stack supports bidding, subscriptions,
+          crew dispatch, before-and-after photo proof, and an admin dashboard
+          without splitting the business across disconnected codebases.
+        </p>
+      </div>
+    ),
+  },
   {
     href: 'https://fantasyfootball-nextjs.vercel.app/',
     title: 'Nfl Last Longer',
