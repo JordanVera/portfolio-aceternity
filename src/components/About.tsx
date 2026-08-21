@@ -4,6 +4,7 @@ import { ElectricBorder } from '@/components/ElectricBorder';
 import Image from 'next/image';
 
 import { motion } from 'motion/react';
+import Link from 'next/link';
 
 function getAge(birthDate: Date): number {
   const today = new Date();
@@ -81,11 +82,15 @@ export default function About() {
         </Paragraph>
 
         <Paragraph className=" mt-4">
-          I invite you to explore my website&apos;s projects section, where
-          you&apos;ll find my standout creations. Among them, I am particularly
-          proud of PGA Alpha and NFL Last Longer, which I consider to be my
-          featured projects. These applications have been the focal point of my
-          efforts and have allowed me to showcase my skills and dedication.
+          I invite you to explore my website&apos;s{' '}
+          <Link href="/projects" className="text-blue-500 hover:text-blue-600">
+            projects section
+          </Link>
+          , where you&apos;ll find my standout creations. Among them, I am
+          particularly proud of PGA Alpha and NFL Last Longer, which I consider
+          to be my featured projects. These applications have been the focal
+          point of my efforts and have allowed me to showcase my skills and
+          dedication.
         </Paragraph>
         <Paragraph className=" mt-4">
           Thank you for taking the time to learn more about me. I am eager to
