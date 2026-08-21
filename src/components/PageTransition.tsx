@@ -13,7 +13,7 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
       initial={reduceMotion ? false : { opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3, ease: 'easeOut' }}
-      className="lg:pl-2 lg:pt-2 bg-black flex-1 overflow-y-auto"
+      className="lg:pl-2 lg:pt-2 bg-background flex-1 overflow-y-auto"
     >
       {children}
     </motion.div>

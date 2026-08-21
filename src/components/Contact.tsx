@@ -110,7 +110,7 @@ export const Contact = () => {
             name="name"
             placeholder="Your Name"
             autoComplete="name"
-            className="bg-neutral-800 focus:outline-none focus:ring-2 focus:ring-neutral-600 px-2 py-2 rounded-md text-sm text-neutral-100 w-full"
+            className="bg-input focus:outline-none focus:ring-2 focus:ring-input-ring px-2 py-2 rounded-md text-sm text-input-fg w-full placeholder:text-foreground-subtle"
             value={formData.name.value}
             onChange={(e) => {
               setFormData({
@@ -127,7 +127,7 @@ export const Contact = () => {
             name="email"
             placeholder="Your email address"
             autoComplete="email"
-            className="bg-neutral-800 focus:outline-none focus:ring-2 focus:ring-neutral-600 px-2 py-2 rounded-md text-sm text-neutral-100 w-full"
+            className="bg-input focus:outline-none focus:ring-2 focus:ring-input-ring px-2 py-2 rounded-md text-sm text-input-fg w-full placeholder:text-foreground-subtle"
             value={formData.email.value}
             onChange={(e) => {
               setFormData({
@@ -145,7 +145,7 @@ export const Contact = () => {
             name="message"
             placeholder="Your Message"
             rows={10}
-            className="bg-neutral-800 focus:outline-none focus:ring-2 focus:ring-neutral-600 px-2 mt-4 py-2 rounded-md text-sm text-neutral-100 w-full"
+            className="bg-input focus:outline-none focus:ring-2 focus:ring-input-ring px-2 mt-4 py-2 rounded-md text-sm text-input-fg w-full placeholder:text-foreground-subtle"
             value={formData.message.value}
             onChange={(e) => {
               setFormData({
@@ -165,7 +165,7 @@ export const Contact = () => {
           disabled={!isComplete || status === 'submitting'}
         >
           <button
-            className="w-full px-2 py-2 bg-sky-600 hover:bg-sky-500 rounded-md font-bold text-white disabled:opacity-40 disabled:hover:bg-sky-600 disabled:cursor-not-allowed transition-colors"
+            className="w-full px-2 py-2 bg-accent-button hover:bg-accent-strong rounded-md font-bold text-cta-fg disabled:opacity-40 disabled:hover:bg-accent-button disabled:cursor-not-allowed transition-colors"
             type="submit"
             disabled={!isComplete || status === 'submitting'}
           >
@@ -204,10 +204,10 @@ const Toast = ({
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 12, scale: 0.98 }}
           transition={{ duration: 0.2 }}
-          className="fixed bottom-6 right-6 z-[200] flex max-w-sm items-start gap-3 rounded-lg border border-zinc-700 bg-zinc-800 px-4 py-3 text-sm text-white shadow-xl shadow-black/40"
+          className="fixed bottom-6 right-6 z-[200] flex max-w-sm items-start gap-3 rounded-lg border border-muted bg-surface-elevated px-4 py-3 text-sm text-foreground shadow-xl shadow-background/40"
         >
           {isSuccess ? (
-            <IconCircleCheckFilled className="mt-0.5 h-5 w-5 flex-shrink-0 text-sky-400" />
+            <IconCircleCheckFilled className="mt-0.5 h-5 w-5 flex-shrink-0 text-accent" />
           ) : (
             <IconExclamationCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-rose-400" />
           )}
@@ -216,7 +216,7 @@ const Toast = ({
             type="button"
             onClick={onDismiss}
             aria-label="Dismiss notification"
-            className="absolute right-2 top-2 rounded p-0.5 text-zinc-400 hover:text-white"
+            className="absolute right-2 top-2 rounded p-0.5 text-foreground-subtle hover:text-foreground"
           >
             <IconX className="h-4 w-4" />
           </button>

@@ -24,14 +24,13 @@ export function Avatar({ src, alt, size = 80, className }: AvatarProps) {
       <ElectricBorder
         chaos={isHovered ? HOVER_CHAOS : IDLE_CHAOS}
         borderRadius={999}
-        color="#0ea5e9"
         active
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         className={twMerge('flex-shrink-0 rounded-full', className)}
       >
         <div
-          className="relative overflow-hidden rounded-full bg-zinc-700"
+          className="relative overflow-hidden rounded-full bg-muted"
           style={{ width: size, height: size }}
         >
           <Image

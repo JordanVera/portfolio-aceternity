@@ -35,7 +35,7 @@ export default function Home() {
             href="/webDevResume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block text-center text-white font-bold bg-gradient-to-br from-cyan-600 to-blue-600 w-full p-2 rounded-lg hover:opacity-90 transition-opacity"
+            className="inline-block text-center text-cta-fg font-bold bg-gradient-to-br from-cta-from to-cta-to w-full p-2 rounded-lg hover:opacity-90 transition-opacity"
           >
             Download Full Resume
           </Link>

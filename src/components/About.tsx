@@ -42,7 +42,7 @@ export default function About() {
 
   useEffect(() => {
     const skyline = skylineRef.current;
-    const panel = skyline?.closest('.bg-zinc-900') as HTMLElement | null;
+    const panel = skyline?.closest('.js-main-panel') as HTMLElement | null;
     if (!skyline || !panel) return;
 
     const syncToMain = () => {
@@ -83,7 +83,6 @@ export default function About() {
               transition={{ duration: 0.2, delay: index * 0.1 }}
             >
               <ElectricBorder
-                color="#0ea5e9"
                 chaos={0.03}
                 borderRadius={6}
                 className="rounded-md"
@@ -121,7 +120,7 @@ export default function About() {
             I invite you to explore my website&apos;s{' '}
             <Link
               href="/projects"
-              className="text-blue-500 hover:text-blue-600"
+              className="text-accent hover:text-accent-hover"
             >
               projects section
             </Link>
@@ -151,7 +150,7 @@ export default function About() {
           alt=""
           width={350}
           height={133}
-          className="block h-auto w-full opacity-50"
+          className="skyline-art block h-auto w-full opacity-50"
         />
       </motion.div>
       <div className="h-[calc(72px+env(safe-area-inset-bottom))]" aria-hidden />

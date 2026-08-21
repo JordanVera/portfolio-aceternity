@@ -55,12 +55,11 @@ export const NotFoundGlitch = () => {
       <div className="flex min-h-[70vh] items-center justify-center py-10">
         <ElectricBorder
           chaos={chaos}
-          color="#0ea5e9"
           borderRadius={16}
           active
           className="w-full max-w-lg rounded-2xl"
         >
-          <div className="rounded-2xl bg-zinc-900 px-8 py-12 text-center sm:px-12">
+          <div className="rounded-2xl bg-surface px-8 py-12 text-center sm:px-12">
             <div className="relative mx-auto mb-4 inline-block">
               <motion.span
                 aria-hidden
@@ -78,7 +77,7 @@ export const NotFoundGlitch = () => {
                   opacity: glitching ? 0.85 : 0,
                   x: glitching ? 4 : 0,
                 }}
-                className="absolute inset-0 select-none text-7xl font-black text-cyan-400 md:text-8xl"
+                className="absolute inset-0 select-none text-7xl font-black text-accent md:text-8xl"
               >
                 404
               </motion.span>
@@ -88,7 +87,7 @@ export const NotFoundGlitch = () => {
                   skewX: glitching ? [-8, 6, -3, 0] : 0,
                 }}
                 transition={{ duration: 0.18 }}
-                className="relative text-7xl font-black tracking-tight text-white md:text-8xl"
+                className="relative text-7xl font-black tracking-tight text-foreground md:text-8xl"
               >
                 404
               </motion.h1>
@@ -107,7 +106,7 @@ export const NotFoundGlitch = () => {
                 as={Link}
                 href="/"
                 containerClassName="rounded-full"
-                className="dark:bg-black bg-white text-black dark:text-white flex items-center space-x-2"
+                className="bg-background text-foreground flex items-center space-x-2"
               >
                 <span>Back home</span>
               </HoverBorderGradient>

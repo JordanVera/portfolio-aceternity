@@ -302,13 +302,13 @@ export const TechStack = () => {
       >
         Tech Stack
       </Heading>
-      <div className="divide-y divide-zinc-800 border-t border-zinc-800">
+      <div className="divide-y divide-border border-t border-border">
         {categories.map((category) => (
           <section
             key={category.name}
             className="grid grid-cols-1 sm:grid-cols-[11.5rem_1fr] gap-3 sm:gap-6 py-5"
           >
-            <h3 className="text-sm text-zinc-400 pt-1.5">{category.name}</h3>
+            <h3 className="text-sm text-foreground-subtle pt-1.5">{category.name}</h3>
             <div className="flex flex-wrap gap-2">
               {category.items.map((item) => (
                 <ElectricHover
@@ -321,7 +321,7 @@ export const TechStack = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     title={item.title}
-                    className="inline-flex items-center gap-2 rounded-lg border border-zinc-700 bg-zinc-800 px-2.5 py-1.5 text-sm text-white"
+                    className="inline-flex items-center gap-2 rounded-lg border border-muted bg-surface-elevated px-2.5 py-1.5 text-sm text-foreground"
                   >
                     <Image
                       src={item.src}
@@ -330,7 +330,7 @@ export const TechStack = () => {
                       alt=""
                       className={twMerge(
                         'h-4 w-4 object-contain',
-                        item.invert && 'brightness-0 invert',
+                        item.invert && 'theme-logo-invert',
                       )}
                     />
                     <span>{item.title}</span>

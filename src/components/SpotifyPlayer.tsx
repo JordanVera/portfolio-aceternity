@@ -46,7 +46,7 @@ export const SpotifyPlayer = ({ track }: { track: SpotifyTrack }) => {
 
   useEffect(() => {
     const player = playerRef.current;
-    const panel = player?.closest('.bg-zinc-900') as HTMLElement | null;
+    const panel = player?.closest('.js-main-panel') as HTMLElement | null;
     if (!player || !panel) return;
 
     const syncToMain = () => {

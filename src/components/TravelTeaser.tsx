@@ -21,7 +21,7 @@ export const TravelTeaser = () => {
           borderRadius={6}
           className="group rounded-md"
         >
-          <div className="overflow-hidden rounded-md ring-1 ring-white/10">
+          <div className="overflow-hidden rounded-md ring-1 ring-foreground/10">
             <Image
               src={item.src}
               alt="Travel photo"
