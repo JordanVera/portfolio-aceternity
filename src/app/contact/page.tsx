@@ -8,9 +8,9 @@ import { Metadata } from 'next';
 import Image from 'next/image';
 
 export const metadata: Metadata = {
-  title: 'Contact | Jordan Vera',
+  title: 'Contact',
   description:
-    'John Doe is a developer, writer and speaker. He is a digital nomad and travels around the world while working remotely.',
+    'Get in touch with Jordan Vera about a project, a role, or a collaboration. Email verawebdev@protonmail.com.',
   icons: {
     icon: '/images/logoWhite.svg',
   },

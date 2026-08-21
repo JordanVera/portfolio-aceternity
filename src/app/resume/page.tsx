@@ -10,9 +10,9 @@ import Link from 'next/link';
 import { TechStack } from '@/components/TechStack';
 
 export const metadata: Metadata = {
-  title: 'Resume | Jordan Vera',
+  title: 'Resume',
   description:
-    'John Doe is a developer, writer and speaker. He is a digital nomad and travels around the world while working remotely.',
+    'Work history and tech stack for Jordan Vera, a fullstack developer in Houston. Roles at The Lighthouse Church, Digital Publishing Inc., and Frontier Services Group.',
   icons: {
     icon: '/images/logoWhite.svg',
   },

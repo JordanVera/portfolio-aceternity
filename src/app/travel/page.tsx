@@ -7,9 +7,9 @@ import { TravelGallery } from '@/components/TravelGallery';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Travel | Jordan Vera',
+  title: 'Travel',
   description:
-    'Photos and short clips from places I have been — concerts, stadiums, and trips out of Houston.',
+    'Photos and short clips from places Jordan Vera has been — concerts, stadiums, and trips out of Houston.',
   icons: {
     icon: '/images/logoWhite.svg',
   },

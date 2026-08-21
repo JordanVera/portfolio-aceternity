@@ -15,7 +15,9 @@ const ctaClass =
   'inline-flex items-center gap-2 rounded-md bg-zinc-800 px-3 py-2 text-sm text-zinc-200 ring-1 ring-white/10 transition hover:bg-gradient-to-br hover:from-cyan-600 hover:to-blue-600 hover:text-white hover:ring-transparent';
 
 export const metadata: Metadata = {
-  title: 'Jordan Vera - Developer',
+  title: {
+    absolute: 'Jordan Vera - Developer',
+  },
   description:
     'Jordan Vera is a fullstack developer in Houston building products like Legendary Barber Competition and Exterior Pro Stack.',
   icons: {

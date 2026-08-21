@@ -5,9 +5,9 @@ import { SpotifyPlayer } from '@/components/SpotifyPlayer';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Projects | Jordan Vera',
+  title: 'Projects',
   description:
-    'John Doe is a developer, writer and speaker. He is a digital nomad and travels around the world while working remotely.',
+    'Web apps and products by Jordan Vera, including Legendary Barber Competition, Exterior Pro Stack, NFL Last Longer, and more.',
   icons: {
     icon: '/images/logoWhite.svg',
   },

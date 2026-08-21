@@ -21,14 +21,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return {
       title: product.title,
       description: product.description,
-    };
-  } else {
-    return {
-      title: 'Projects | Jordan Vera',
-      description:
-        'John Doe is a developer, writer and speaker. He is a digital nomad and travels around the world while working remotely.',
+      icons: {
+        icon: '/images/logoWhite.svg',
+      },
     };
   }
+
+  return {
+    title: 'Projects',
+    description:
+      'Web apps and products by Jordan Vera, including Legendary Barber Competition, Exterior Pro Stack, NFL Last Longer, and more.',
+    icons: {
+      icon: '/images/logoWhite.svg',
+    },
+  };
 }
 
 export default function SingleProjectPage({
