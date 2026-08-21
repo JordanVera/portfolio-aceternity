@@ -1,5 +1,6 @@
 'use client';
 
+import { ElectricHover } from '@/components/ElectricBorder';
 import { travelMedia, TravelMedia } from '@/constants/travel';
 import {
   IconChevronLeft,
@@ -48,7 +49,7 @@ export const TravelGallery = () => {
 
   return (
     <>
-      <div className="columns-2 md:columns-3 gap-4">
+      <div className="columns-2 gap-5 md:columns-3">
         {travelMedia.map((item, index) => (
           <GalleryTile
             key={item.src}
@@ -86,29 +87,34 @@ const GalleryTile = ({
   onOpen: () => void;
 }) => {
   return (
-    <motion.button
-      type="button"
-      initial={{ opacity: 0, y: 16 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.25, delay: index * 0.04 }}
-      onClick={onOpen}
-      aria-label={
-        item.type === 'video' ? 'Open travel video' : 'Open travel photo'
-      }
-      className="group relative mb-4 block w-full break-inside-avoid overflow-hidden rounded-md ring-1 ring-white/10 transition duration-200 hover:scale-[1.02] hover:ring-2 hover:ring-sky-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500"
+    <ElectricHover
+      borderRadius={6}
+      className="mb-5 w-full break-inside-avoid rounded-md"
     >
-      {item.type === 'image' ? (
-        <Image
-          src={item.src}
-          alt="Travel photo"
-          width={800}
-          height={1000}
-          className="h-auto w-full rounded-md object-cover"
-        />
-      ) : (
-        <GridVideo src={item.src} paused={paused} />
-      )}
-    </motion.button>
+      <motion.button
+        type="button"
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.25, delay: index * 0.04 }}
+        onClick={onOpen}
+        aria-label={
+          item.type === 'video' ? 'Open travel video' : 'Open travel photo'
+        }
+        className="group relative block w-full overflow-hidden rounded-md ring-1 ring-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500"
+      >
+        {item.type === 'image' ? (
+          <Image
+            src={item.src}
+            alt="Travel photo"
+            width={800}
+            height={1000}
+            className="h-auto w-full rounded-md object-cover"
+          />
+        ) : (
+          <GridVideo src={item.src} paused={paused} />
+        )}
+      </motion.button>
+    </ElectricHover>
   );
 };
 

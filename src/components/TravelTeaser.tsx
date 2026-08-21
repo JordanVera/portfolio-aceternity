@@ -1,3 +1,6 @@
+'use client';
+
+import { ElectricHover } from '@/components/ElectricBorder';
 import { travelMedia } from '@/constants/travel';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -10,21 +13,24 @@ export const TravelTeaser = () => {
   return (
     <Link
       href="/travel"
-      className="group grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4"
+      className="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-5"
     >
       {teaserImages.map((item) => (
-        <div
+        <ElectricHover
           key={item.src}
-          className="overflow-hidden rounded-md ring-1 ring-white/10 transition duration-200 group-hover:ring-sky-500"
+          borderRadius={6}
+          className="group rounded-md"
         >
-          <Image
-            src={item.src}
-            alt="Travel photo"
-            width={400}
-            height={300}
-            className="h-28 w-full object-cover transition duration-200 group-hover:scale-[1.03] md:h-36"
-          />
-        </div>
+          <div className="overflow-hidden rounded-md ring-1 ring-white/10">
+            <Image
+              src={item.src}
+              alt="Travel photo"
+              width={400}
+              height={300}
+              className="h-28 w-full object-cover transition duration-200 group-hover:scale-[1.03] md:h-36"
+            />
+          </div>
+        </ElectricHover>
       ))}
     </Link>
   );
