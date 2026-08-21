@@ -17,7 +17,7 @@ const ctaClass =
 export const metadata: Metadata = {
   title: 'Jordan Vera - Developer',
   description:
-    'Jordan Vera is a fullstack developer in Houston building products like Exterior Pro Stack and NFL Last Longer.',
+    'Jordan Vera is a fullstack developer in Houston building products like Legendary Barber Competition and Exterior Pro Stack.',
   icons: {
     icon: '/images/logoWhite.svg',
   },
@@ -30,9 +30,9 @@ export default function Home() {
       <Heading className="font-black">Hello there! I&apos;m Jordan</Heading>
       <Paragraph className="mt-4 max-w-xl">
         I&apos;m a fullstack developer in Houston building products like{' '}
-        <Highlight>Exterior Pro Stack</Highlight> and{' '}
-        <Highlight>NFL Last Longer</Highlight> — web, native, and the APIs
-        underneath.
+        <Highlight>Legendary Barber Competition</Highlight> and{' '}
+        <Highlight>Exterior Pro Stack</Highlight> — branded sites, web,
+        native, and the APIs underneath.
       </Paragraph>
       <Paragraph className="mt-4 max-w-xl">
         Beyond the keyboard I like live music, traveling, and the Kansas City
