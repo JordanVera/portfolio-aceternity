@@ -32,7 +32,14 @@ export default function TravelPage() {
         className="h-[calc(72px+env(safe-area-inset-bottom))]"
         aria-hidden
       />
-      <SpotifyPlayer />
+      <SpotifyPlayer
+        track={{
+          title: 'Ghost!',
+          artist: 'Kid Cudi',
+          src: '/Kid Cudi-Ghost!.mp3',
+          cover: 'ghost',
+        }}
+      />
     </>
   );
 }

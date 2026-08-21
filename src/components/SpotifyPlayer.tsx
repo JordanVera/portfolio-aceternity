@@ -7,17 +7,18 @@ import {
   IconVolumeOff,
 } from '@tabler/icons-react';
 import dynamic from 'next/dynamic';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useId, useRef, useState } from 'react';
 import type WaveSurfer from 'wavesurfer.js';
 
 const WavesurferPlayer = dynamic(() => import('@wavesurfer/react'), {
   ssr: false,
 });
 
-const TRACK = {
-  title: 'Ghost!',
-  artist: 'Kid Cudi',
-  src: encodeURI('/Kid Cudi-Ghost!.mp3'),
+export type SpotifyTrack = {
+  title: string;
+  artist: string;
+  src: string;
+  cover?: 'ghost' | 'riot';
 };
 
 const formatTime = (seconds: number) => {
@@ -27,7 +28,7 @@ const formatTime = (seconds: number) => {
   return `${mins}:${secs.toString().padStart(2, '0')}`;
 };
 
-export const SpotifyPlayer = () => {
+export const SpotifyPlayer = ({ track }: { track: SpotifyTrack }) => {
   const playerRef = useRef<HTMLDivElement>(null);
   const wavesurferRef = useRef<WaveSurfer | null>(null);
   const currentTimeRef = useRef<HTMLSpanElement>(null);
@@ -136,17 +137,17 @@ export const SpotifyPlayer = () => {
     <div
       ref={playerRef}
       role="region"
-      aria-label="Now playing Ghost! by Kid Cudi"
+      aria-label={`Now playing ${track.title} by ${track.artist}`}
       className="fixed bottom-0 left-0 right-0 z-[80] border-t border-white/10 bg-[#181818]/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-xl lg:left-[14rem]"
     >
       <div className="mx-auto flex h-[72px] max-w-screen-2xl items-center gap-3 px-3 md:gap-4 md:px-4">
         <div className="flex min-w-0 items-center gap-3 md:w-[22%]">
-          <AlbumArt />
+          <AlbumArt variant={track.cover ?? 'ghost'} />
           <div className="min-w-0">
             <p className="truncate text-sm font-semibold text-white">
-              {TRACK.title}
+              {track.title}
             </p>
-            <p className="truncate text-xs text-zinc-400">{TRACK.artist}</p>
+            <p className="truncate text-xs text-zinc-400">{track.artist}</p>
           </div>
         </div>
 
@@ -173,7 +174,7 @@ export const SpotifyPlayer = () => {
           </span>
           <div className="h-9 min-w-0 flex-1">
             <WavesurferPlayer
-              url={TRACK.src}
+              url={encodeURI(track.src)}
               height={36}
               barWidth={2}
               barGap={2}
@@ -247,29 +248,50 @@ export const SpotifyPlayer = () => {
   );
 };
 
-const AlbumArt = () => {
+const AlbumArt = ({ variant }: { variant: 'ghost' | 'riot' }) => {
+  const gradientId = `album-sky-${useId().replace(/:/g, '')}`;
+
   return (
     <div
       className="relative h-12 w-12 shrink-0 overflow-hidden rounded-sm shadow-lg ring-1 ring-white/10"
       aria-hidden
     >
-      <svg viewBox="0 0 64 64" className="h-full w-full">
-        <defs>
-          <radialGradient id="ghost-sky" cx="50%" cy="80%" r="80%">
-            <stop offset="0%" stopColor="#312e81" />
-            <stop offset="55%" stopColor="#1e1b4b" />
-            <stop offset="100%" stopColor="#09090b" />
-          </radialGradient>
-        </defs>
-        <rect width="64" height="64" fill="url(#ghost-sky)" />
-        <circle cx="14" cy="12" r="0.8" fill="white" opacity="0.7" />
-        <circle cx="28" cy="8" r="0.6" fill="white" opacity="0.5" />
-        <circle cx="50" cy="16" r="0.7" fill="white" opacity="0.6" />
-        <circle cx="44" cy="6" r="0.5" fill="white" opacity="0.4" />
-        <circle cx="10" cy="24" r="0.5" fill="white" opacity="0.45" />
-        <circle cx="46" cy="28" r="18" fill="#e4e4e7" />
-        <circle cx="54" cy="24" r="14" fill="#1e1b4b" />
-      </svg>
+      {variant === 'riot' ? (
+        <svg viewBox="0 0 64 64" className="h-full w-full">
+          <defs>
+            <radialGradient id={gradientId} cx="50%" cy="80%" r="80%">
+              <stop offset="0%" stopColor="#7f1d1d" />
+              <stop offset="55%" stopColor="#450a0a" />
+              <stop offset="100%" stopColor="#09090b" />
+            </radialGradient>
+          </defs>
+          <rect width="64" height="64" fill={`url(#${gradientId})`} />
+          <circle cx="32" cy="38" r="16" fill="#f97316" />
+          <circle cx="32" cy="38" r="10" fill="#facc15" />
+          <path
+            d="M20 28 C24 18 30 14 32 8 C34 16 40 20 44 28 C38 26 34 30 32 36 C30 30 26 26 20 28 Z"
+            fill="#ef4444"
+          />
+        </svg>
+      ) : (
+        <svg viewBox="0 0 64 64" className="h-full w-full">
+          <defs>
+            <radialGradient id={gradientId} cx="50%" cy="80%" r="80%">
+              <stop offset="0%" stopColor="#312e81" />
+              <stop offset="55%" stopColor="#1e1b4b" />
+              <stop offset="100%" stopColor="#09090b" />
+            </radialGradient>
+          </defs>
+          <rect width="64" height="64" fill={`url(#${gradientId})`} />
+          <circle cx="14" cy="12" r="0.8" fill="white" opacity="0.7" />
+          <circle cx="28" cy="8" r="0.6" fill="white" opacity="0.5" />
+          <circle cx="50" cy="16" r="0.7" fill="white" opacity="0.6" />
+          <circle cx="44" cy="6" r="0.5" fill="white" opacity="0.4" />
+          <circle cx="10" cy="24" r="0.5" fill="white" opacity="0.45" />
+          <circle cx="46" cy="28" r="18" fill="#e4e4e7" />
+          <circle cx="54" cy="24" r="14" fill="#1e1b4b" />
+        </svg>
+      )}
     </div>
   );
 };
