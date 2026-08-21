@@ -40,7 +40,7 @@ export default function Home() {
             Download Full Resume
           </Link>
         </ElectricHover>
-        <TechStack />
+        {/* <TechStack /> */}
       </Container>
       <div className="h-[calc(72px+env(safe-area-inset-bottom))]" aria-hidden />
       <SpotifyPlayer

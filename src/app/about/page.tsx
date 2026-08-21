@@ -1,13 +1,9 @@
 import { Container } from '@/components/Container';
 import { Heading } from '@/components/Heading';
-import { Highlight } from '@/components/Highlight';
-import { Paragraph } from '@/components/Paragraph';
-import { Products } from '@/components/Products';
 import { Metadata } from 'next';
-import Image from 'next/image';
 
-import { motion } from 'motion/react';
 import About from '@/components/About';
+import { TechStack } from '@/components/TechStack';
 
 export const metadata: Metadata = {
   title: 'About',
@@ -25,6 +21,7 @@ export default function AboutPage() {
         <span className="text-4xl">💬</span>
         <Heading className="font-black">About Me</Heading>
         <About />
+        <TechStack />
       </Container>
     </div>
   );
