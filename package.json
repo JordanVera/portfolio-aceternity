@@ -17,6 +17,8 @@
     "@types/node": "20.5.3",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
+    "@vercel/analytics": "^2.0.1",
+    "@vercel/speed-insights": "^2.0.0",
     "@wavesurfer/react": "^1.0.12",
     "autoprefixer": "10.4.15",
     "clsx": "^2.0.0",
