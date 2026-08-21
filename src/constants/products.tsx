@@ -39,7 +39,7 @@ export const products = [
     ),
   },
   {
-    href: 'https://exterior-pro-stack.vercel.app/',
+    href: 'https://exteriorprostack.tech/',
     title: 'Exterior Pro Stack',
     description:
       'A two-sided marketplace for recurring exterior care and on-demand jobs, spanning web, native, and Stripe-powered payouts.',
