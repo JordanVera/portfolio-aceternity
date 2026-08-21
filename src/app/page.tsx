@@ -1,16 +1,22 @@
 import { Container } from '@/components/Container';
+import { FeaturedWork } from '@/components/FeaturedWork';
 import { Heading } from '@/components/Heading';
 import { Highlight } from '@/components/Highlight';
 import { Paragraph } from '@/components/Paragraph';
-import { Products } from '@/components/Products';
-import { TechStack } from '@/components/TechStack';
-import Image from 'next/image';
+import { TravelTeaser } from '@/components/TravelTeaser';
+import { IconBriefcase2, IconMail, IconScript } from '@tabler/icons-react';
 import { Metadata } from 'next';
+import Link from 'next/link';
+
+const CONTACT_EMAIL = 'verawebdev@protonmail.com';
+
+const ctaClass =
+  'inline-flex items-center gap-2 rounded-md bg-zinc-800 px-3 py-2 text-sm text-zinc-200 ring-1 ring-white/10 transition hover:bg-zinc-700 hover:text-white';
 
 export const metadata: Metadata = {
   title: 'Jordan Vera - Developer',
   description:
-    'John Doe is a developer, writer and speaker. He is a digital nomad and travels around the world while working remotely.',
+    'Jordan Vera is a fullstack developer in Houston building products like Exterior Pro Stack and NFL Last Longer.',
   icons: {
     icon: '/images/logoWhite.svg',
   },
@@ -21,24 +27,84 @@ export default function Home() {
     <Container>
       <span className="text-4xl">👋</span>
       <Heading className="font-black">Hello there! I&apos;m Jordan</Heading>
-      <Paragraph className="max-w-xl mt-4">
-        I&apos;m Jordan Vera, a passionate software engineer with a knack for
-        creating simple solutions through code. I thrive on the excitement of
-        bringing ideas to life and transforming them into tangible, functional
-        products.
+      <Paragraph className="mt-4 max-w-xl">
+        I&apos;m a fullstack developer in Houston building products like{' '}
+        <Highlight>Exterior Pro Stack</Highlight> and{' '}
+        <Highlight>NFL Last Longer</Highlight> — web, native, and the APIs
+        underneath.
       </Paragraph>
-      <Paragraph className="max-w-xl mt-4">
-        Beyond coding, I like listening to live music, traveling, and watching
-        football (specifically the Kansas City Chiefs).
+      <Paragraph className="mt-4 max-w-xl">
+        Beyond the keyboard I like live music, traveling, and the Kansas City
+        Chiefs.
       </Paragraph>
-      <Heading
-        as="h2"
-        className="font-black text-lg md:text-lg lg:text-lg mt-20 mb-4"
-      >
-        What I&apos;ve been working on
-      </Heading>
-      <Products />
-      <TechStack />
+
+      <div className="mt-8 flex flex-wrap items-center gap-3">
+        <Link href="#featured" className={ctaClass}>
+          <IconBriefcase2 className="h-4 w-4" />
+          See work
+        </Link>
+        <Link href="/contact" className={ctaClass}>
+          <IconMail className="h-4 w-4" />
+          Contact
+        </Link>
+        <Link href="/resume" className={ctaClass}>
+          <IconScript className="h-4 w-4" />
+          Resume
+        </Link>
+      </div>
+
+      <section id="featured" className="scroll-mt-8">
+        <div className="mb-6 mt-20 flex items-end justify-between gap-4">
+          <Heading as="h2" className="font-black text-lg md:text-lg lg:text-lg">
+            Selected work
+          </Heading>
+          <Link
+            href="/projects"
+            className="shrink-0 text-sm text-sky-400 transition hover:text-sky-300"
+          >
+            See all projects
+          </Link>
+        </div>
+        <FeaturedWork />
+      </section>
+
+      <section className="mt-20">
+        <div className="mb-6 flex items-end justify-between gap-4">
+          <Heading as="h2" className="font-black text-lg md:text-lg lg:text-lg">
+            From the road
+          </Heading>
+          <Link
+            href="/travel"
+            className="shrink-0 text-sm text-sky-400 transition hover:text-sky-300"
+          >
+            See all
+          </Link>
+        </div>
+        <TravelTeaser />
+      </section>
+
+      <section className="mt-20">
+        <Heading as="h2" className="font-black text-lg md:text-lg lg:text-lg">
+          Let&apos;s talk
+        </Heading>
+        <Paragraph className="mt-4 max-w-xl">
+          Have a project, a role, or just want to say hi? Email me at{' '}
+          <a
+            href={`mailto:${CONTACT_EMAIL}`}
+            className="text-sky-400 underline underline-offset-2 hover:text-sky-300"
+          >
+            {CONTACT_EMAIL}
+          </a>{' '}
+          or{' '}
+          <Link
+            href="/contact"
+            className="text-sky-400 underline underline-offset-2 hover:text-sky-300"
+          >
+            send a message
+          </Link>
+          .
+        </Paragraph>
+      </section>
     </Container>
   );
 }
