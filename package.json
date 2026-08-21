@@ -17,6 +17,7 @@
     "@types/node": "20.5.3",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
+    "@wavesurfer/react": "^1.0.12",
     "autoprefixer": "10.4.15",
     "clsx": "^2.0.0",
     "motion": "^13.1.0",
@@ -29,7 +30,8 @@
     "remark-gfm": "^3.0.1",
     "tailwind-merge": "^1.14.0",
     "tailwindcss": "3.3.3",
-    "typescript": "5.1.6"
+    "typescript": "5.1.6",
+    "wavesurfer.js": "^7.12.11"
   },
   "devDependencies": {
     "@types/nodemailer": "^6.4.16",
