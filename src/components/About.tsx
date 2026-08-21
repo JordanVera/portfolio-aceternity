@@ -11,7 +11,7 @@ import { useEffect, useRef } from 'react';
 const RIOT_TRACK = {
   title: 'Riot!',
   artist: 'Earl Sweatshirt',
-  src: '/Earl Sweatshirt-Riot!.mp3',
+  src: '/music/Earl Sweatshirt-Riot!.mp3',
   cover: 'riot' as const,
 };
 
