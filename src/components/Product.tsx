@@ -34,7 +34,7 @@ export const SingleProduct = ({ product }: { product: Product }) => {
           width="1000"
           className="rounded-md object-contain"
         />
-        <div className="absolute bottom-0 bg-zinc-900 h-40 w-full [mask-image:linear-gradient(to_bottom,transparent,black)]" />
+        <div className="absolute bottom-0 bg-surface h-40 w-full [mask-image:linear-gradient(to_bottom,transparent,black)]" />
       </motion.div>
 
       <div className="flex lg:flex-row justify-between items-center flex-col mt-20">
@@ -43,7 +43,7 @@ export const SingleProduct = ({ product }: { product: Product }) => {
           {product.stack?.map((stack: string) => (
             <span
               key={stack}
-              className="text-xs  md:text-xs lg:text-xs bg-zinc-700 px-2 py-1 rounded-sm text-white"
+              className="text-xs  md:text-xs lg:text-xs bg-muted px-2 py-1 rounded-sm text-foreground"
             >
               {stack}
             </span>
@@ -51,18 +51,18 @@ export const SingleProduct = ({ product }: { product: Product }) => {
         </div>
       </div>
       <div>
-        <Paragraph className="max-w-xl mt-4 text-white italic">
+        <Paragraph className="max-w-xl mt-4 text-foreground italic">
           {product.description}
         </Paragraph>
       </div>
-      <div className="prose prose-sm md:prose-base max-w-none text-neutral-600">
+      <div className="prose prose-sm md:prose-base max-w-none text-foreground-muted">
         {product?.content}
       </div>
 
       <a
         href={product.href}
         target="__blank"
-        className="inline-flex items-center gap-1 group/button rounded-full hover:scale-105 focus:outline-none transition ring-offset-gray-900 bg-gray-800 text-white shadow-lg shadow-black/20 sm:backdrop-blur-sm group-hover/button:bg-gray-50/15 group-hover/button:scale-105 focus-visible:ring-1 focus-visible:ring-offset-2 ring-gray-50/60 text-sm font-medium px-4 py-2 mt-auto origin-left"
+        className="inline-flex items-center gap-1 group/button rounded-full hover:scale-105 focus:outline-none transition ring-offset-surface bg-surface-elevated text-foreground shadow-lg shadow-background/20 sm:backdrop-blur-sm group-hover/button:bg-foreground/15 group-hover/button:scale-105 focus-visible:ring-1 focus-visible:ring-offset-2 ring-foreground/60 text-sm font-medium px-4 py-2 mt-auto origin-left"
       >
         Live Preview
         <svg

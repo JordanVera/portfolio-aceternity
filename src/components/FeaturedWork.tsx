@@ -28,9 +28,9 @@ export const FeaturedWork = () => {
           <ElectricHover borderRadius={12} className="h-full rounded-xl">
             <Link
               href={`/projects/${product.slug}`}
-              className="group flex h-full flex-col overflow-hidden rounded-xl ring-1 ring-white/10"
+              className="group flex h-full flex-col overflow-hidden rounded-xl ring-1 ring-foreground/10"
             >
-              <div className="relative aspect-[16/9] overflow-hidden bg-zinc-800">
+              <div className="relative aspect-[16/9] overflow-hidden bg-surface-elevated">
                 <Image
                   src={product.thumbnail}
                   alt={product.title}
@@ -39,7 +39,7 @@ export const FeaturedWork = () => {
                   sizes="(min-width: 640px) 50vw, 100vw"
                 />
               </div>
-              <div className="flex flex-1 flex-col bg-zinc-800/40 p-4">
+              <div className="flex flex-1 flex-col bg-surface-elevated/40 p-4">
                 <Heading
                   as="h3"
                   className="font-black text-base md:text-lg lg:text-lg"
@@ -53,7 +53,7 @@ export const FeaturedWork = () => {
                   {product.stack?.map((stack) => (
                     <span
                       key={stack}
-                      className="rounded-sm bg-zinc-700 px-1.5 py-0.5 text-[10px] text-white md:text-xs"
+                      className="rounded-sm bg-muted px-1.5 py-0.5 text-[10px] text-foreground md:text-xs"
                     >
                       {stack}
                     </span>

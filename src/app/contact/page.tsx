@@ -25,7 +25,7 @@ export default function Projects() {
         Reach out over email at{' '}
         <a
           href="mailto:verawebdev@protonmail.com"
-          className="text-sky-400 hover:text-sky-300 underline underline-offset-2"
+          className="text-accent hover:text-accent-hover underline underline-offset-2"
         >
           verawebdev@protonmail.com
         </a>{' '}

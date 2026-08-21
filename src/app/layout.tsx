@@ -1,9 +1,12 @@
 import { Footer } from '@/components/Footer';
 import { PageTransition } from '@/components/PageTransition';
 import { Sidebar } from '@/components/Sidebar';
+import { ThemeProvider } from '@/components/ThemeProvider';
+import { THEME_INIT_SCRIPT } from '@/lib/theme';
 import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import Script from 'next/script';
 import { twMerge } from 'tailwind-merge';
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
@@ -31,20 +34,27 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className="dark" data-theme="dark" suppressHydrationWarning>
       <body
         className={twMerge(
           inter.className,
-          'flex antialiased h-screen overflow-hidden bg-black',
+          'flex antialiased h-screen overflow-hidden bg-background text-foreground',
         )}
       >
-        <Sidebar />
-        <PageTransition>
-          <div className="flex flex-col flex-1 bg-zinc-900 min-h-screen lg:rounded-tl-xl overflow-y-auto">
-            <div className="flex-1">{children}</div>
-            <Footer />
-          </div>
-        </PageTransition>
+        <Script
+          id="theme-init"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }}
+        />
+        <ThemeProvider>
+          <Sidebar />
+          <PageTransition>
+            <div className="js-main-panel flex flex-col flex-1 bg-surface min-h-screen lg:rounded-tl-xl overflow-y-auto">
+              <div className="flex-1">{children}</div>
+              <Footer />
+            </div>
+          </PageTransition>
+        </ThemeProvider>
         <Analytics />
         <SpeedInsights />
       </body>

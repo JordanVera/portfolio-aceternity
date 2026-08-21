@@ -1,3 +1,97 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root,
+html[data-theme='dark'] {
+  color-scheme: dark;
+  --background: 0 0 0;
+  --surface: 24 24 27;
+  --surface-elevated: 39 39 42;
+  --muted: 63 63 70;
+  --foreground: 255 255 255;
+  --foreground-muted: 212 212 216;
+  --foreground-subtle: 161 161 170;
+  --accent: 56 189 248;
+  --accent-hover: 125 211 252;
+  --accent-strong: 14 165 233;
+  --accent-button: 2 132 199;
+  --cta-from: 8 145 178;
+  --cta-to: 37 99 235;
+  --cta-fg: 255 255 255;
+  --heading-from: 255 255 255;
+  --heading-to: 228 228 231;
+  --border: 39 39 42;
+  --input: 38 38 38;
+  --input-ring: 82 82 82;
+  --input-fg: 245 245 245;
+  --gradient-highlight: 50 117 248;
+  --electric: #0ea5e9;
+}
+
+html[data-theme='light'] {
+  color-scheme: light;
+  --background: 228 228 231;
+  --surface: 255 255 255;
+  --surface-elevated: 244 244 245;
+  --muted: 228 228 231;
+  --foreground: 24 24 27;
+  --foreground-muted: 63 63 70;
+  --foreground-subtle: 113 113 122;
+  --accent: 2 132 199;
+  --accent-hover: 3 105 161;
+  --accent-strong: 14 165 233;
+  --accent-button: 2 132 199;
+  --cta-from: 8 145 178;
+  --cta-to: 37 99 235;
+  --cta-fg: 255 255 255;
+  --heading-from: 24 24 27;
+  --heading-to: 82 82 91;
+  --border: 212 212 216;
+  --input: 244 244 245;
+  --input-ring: 161 161 170;
+  --input-fg: 24 24 27;
+  --gradient-highlight: 50 117 248;
+  --electric: #0ea5e9;
+}
+
+html[data-theme='lsu'] {
+  color-scheme: dark;
+  --background: 26 10 46;
+  --surface: 45 20 84;
+  --surface-elevated: 70 29 124;
+  --muted: 92 45 153;
+  --foreground: 255 255 255;
+  --foreground-muted: 245 230 200;
+  --foreground-subtle: 212 196 138;
+  --accent: 253 208 35;
+  --accent-hover: 255 229 102;
+  --accent-strong: 253 208 35;
+  --accent-button: 253 208 35;
+  --cta-from: 253 208 35;
+  --cta-to: 230 184 0;
+  --cta-fg: 70 29 124;
+  --heading-from: 253 208 35;
+  --heading-to: 255 244 184;
+  --border: 92 45 153;
+  --input: 70 29 124;
+  --input-ring: 253 208 35;
+  --input-fg: 255 255 255;
+  --gradient-highlight: 253 208 35;
+  --electric: #fdd023;
+}
+
+html[data-theme='dark'] .theme-logo-invert,
+html[data-theme='lsu'] .theme-logo-invert {
+  filter: brightness(0) invert(1);
+}
+
+html[data-theme='light'] .skyline-art {
+  opacity: 0.18;
+  filter: grayscale(1);
+}
+
+::selection {
+  background: rgb(var(--accent) / 0.35);
+  color: rgb(var(--foreground));
+}

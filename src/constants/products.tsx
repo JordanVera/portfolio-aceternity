@@ -18,7 +18,7 @@ export const products = [
     stack: ['Nextjs', 'Tailwindcss'],
     slug: 'legendary-barber',
     content: (
-      <div className="text-white">
+      <div className="text-foreground">
         <p>
           Legendary Barber Competition is a branded event site I built for
           Shedeur Sanders, NFL quarterback for the Cleveland Browns. The
@@ -31,10 +31,9 @@ export const products = [
           The site is a dark, gold-accented Next.js marketing experience:
           Shedeur&apos;s bio and socials, competition details, a three-step
           Apply / Get Selected / Compete process, partner logos, and a
-          submission flow for Cleveland-area barbers. It needed to feel
-          premium enough for an athlete-backed brand while still making the
-          event logistics — date, location, access, and deadline — immediately
-          clear.
+          submission flow for Cleveland-area barbers. It needed to feel premium
+          enough for an athlete-backed brand while still making the event
+          logistics — date, location, access, and deadline — immediately clear.
         </p>
       </div>
     ),
@@ -49,13 +48,13 @@ export const products = [
     stack: ['Nextjs', 'Expo', 'tRPC', 'Prisma', 'Stripe'],
     slug: 'exterior-pro-stack',
     content: (
-      <div className="text-white">
+      <div className="text-foreground">
         <p>
           Exterior Pro Stack is a two-sided platform for everything outside the
           walls: lawn care, gutter cleaning, pressure washing, and related
           services. Homeowners and property managers can subscribe to a
-          recurring plan with the same verified crew, or post a one-time job
-          and let local providers compete on price. The company is merchant of
+          recurring plan with the same verified crew, or post a one-time job and
+          let local providers compete on price. The company is merchant of
           record, so customers pay through the platform, funds are held until
           the visit is complete, and independent crews get paid via Stripe
           Connect.
@@ -63,8 +62,8 @@ export const products = [
         <p>
           The product is a Turborepo monorepo rather than a single app. Next.js
           powers the marketing site plus customer, provider, and admin portals.
-          Expo and React Native cover the homeowner and field-crew apps, with
-          a shared tRPC API, Prisma on MySQL, Vercel Blob for job photos, and
+          Expo and React Native cover the homeowner and field-crew apps, with a
+          shared tRPC API, Prisma on MySQL, Vercel Blob for job photos, and
           Twilio for SMS updates. That stack supports bidding, subscriptions,
           crew dispatch, before-and-after photo proof, and an admin dashboard
           without splitting the business across disconnected codebases.
@@ -82,7 +81,7 @@ export const products = [
     stack: ['Nextjs', 'Tailwindcss'],
     slug: 'nfl-last-longer',
     content: (
-      <div className="text-white">
+      <div className="text-foreground">
         <p>
           NFL Last Longer is a cutting-edge survivor league fantasy football
           application built on the robust Next.js framework. This innovative
@@ -118,7 +117,7 @@ export const products = [
     stack: ['Vite', 'Tailwindcss', 'Nodejs', 'mySQL'],
     slug: 'jordan-gpt',
     content: (
-      <div className="text-white">
+      <div className="text-foreground">
         <p>
           Jordan GPT is a meticulously crafted replica of the popular ChatGPT,
           showcasing advanced web development skills and a deep understanding of
@@ -153,7 +152,7 @@ export const products = [
     stack: ['Vite', 'Tailwindcss'],
     slug: 'dictionary',
     content: (
-      <div className="text-white">
+      <div className="text-foreground">
         <p>
           The Dictionary application is a sleek and efficient tool built with
           Vite and styled with Tailwind CSS, offering users a comprehensive and
@@ -190,7 +189,7 @@ export const products = [
     stack: ['Vite', 'Tailwindcss'],
     slug: 'rock-paper-scissors',
     content: (
-      <div className="text-white">
+      <div className="text-foreground">
         <p>
           Rock, Paper, Scissors is a classic game brought to life in the digital
           realm, serving as a milestone project in the developer&apos;s journey.
@@ -226,7 +225,7 @@ export const products = [
     stack: ['Vite', 'Tailwindcss'],
     slug: 'countries',
     content: (
-      <div className="text-white">
+      <div className="text-foreground">
         <p>
           REST Countries is an innovative web application that serves as a
           comprehensive database of nations worldwide. Built with Vite for
@@ -265,7 +264,7 @@ export const products = [
     stack: ['Vite', 'Tailwindcss'],
     slug: 'pomodoro',
     content: (
-      <div className="text-white">
+      <div className="text-foreground">
         <p>
           The Pomodoro application is a powerful productivity tool designed to
           help users maximize their focus and efficiency using the popular

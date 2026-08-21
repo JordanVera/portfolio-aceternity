@@ -100,7 +100,7 @@ const GalleryTile = ({
         aria-label={
           item.type === 'video' ? 'Open travel video' : 'Open travel photo'
         }
-        className="group relative block w-full overflow-hidden rounded-md ring-1 ring-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500"
+        className="group relative block w-full overflow-hidden rounded-md ring-1 ring-foreground/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-strong"
       >
         {item.type === 'image' ? (
           <Image
@@ -156,8 +156,8 @@ const GridVideo = ({ src, paused }: { src: string; paused: boolean }) => {
         preload="metadata"
         className="pointer-events-none h-auto w-full rounded-md"
       />
-      <span className="pointer-events-none absolute bottom-2 right-2 flex h-7 w-7 items-center justify-center rounded-full bg-black/70 text-white ring-1 ring-white/20">
-        <IconPlayerPlay className="h-3.5 w-3.5 fill-white" />
+      <span className="pointer-events-none absolute bottom-2 right-2 flex h-7 w-7 items-center justify-center rounded-full bg-background/70 text-foreground ring-1 ring-foreground/20">
+        <IconPlayerPlay className="h-3.5 w-3.5 fill-foreground" />
       </span>
     </div>
   );
@@ -183,14 +183,14 @@ const Lightbox = ({
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.2 }}
-      className="fixed inset-0 z-[200] flex items-center justify-center bg-black/80 px-4 py-16 backdrop-blur-sm"
+      className="fixed inset-0 z-[200] flex items-center justify-center bg-background/80 px-4 py-16 backdrop-blur-sm"
       onClick={onClose}
     >
       <button
         type="button"
         onClick={onClose}
         aria-label="Close"
-        className="absolute right-4 top-4 rounded-full bg-zinc-900/80 p-2 text-white ring-1 ring-white/10 transition hover:bg-zinc-800"
+        className="absolute right-4 top-4 rounded-full bg-surface/80 p-2 text-foreground ring-1 ring-foreground/10 transition hover:bg-surface-elevated"
       >
         <IconX className="h-5 w-5" />
       </button>
@@ -201,7 +201,7 @@ const Lightbox = ({
           onPrev();
         }}
         aria-label="Previous"
-        className="absolute left-3 top-1/2 -translate-y-1/2 rounded-full bg-zinc-900/80 p-2 text-white ring-1 ring-white/10 transition hover:bg-zinc-800 md:left-6"
+        className="absolute left-3 top-1/2 -translate-y-1/2 rounded-full bg-surface/80 p-2 text-foreground ring-1 ring-foreground/10 transition hover:bg-surface-elevated md:left-6"
       >
         <IconChevronLeft className="h-5 w-5" />
       </button>
@@ -212,7 +212,7 @@ const Lightbox = ({
           onNext();
         }}
         aria-label="Next"
-        className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-zinc-900/80 p-2 text-white ring-1 ring-white/10 transition hover:bg-zinc-800 md:right-6"
+        className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-surface/80 p-2 text-foreground ring-1 ring-foreground/10 transition hover:bg-surface-elevated md:right-6"
       >
         <IconChevronRight className="h-5 w-5" />
       </button>

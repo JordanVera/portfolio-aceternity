@@ -8,6 +8,37 @@ export const ELECTRIC_COLOR = '#0ea5e9';
 export const ELECTRIC_IDLE_CHAOS = 0.008;
 export const ELECTRIC_HOVER_CHAOS = 0.03;
 
+function useElectricColor() {
+  const [color, setColor] = useState(() => {
+    if (typeof document === 'undefined') return ELECTRIC_COLOR;
+    return (
+      getComputedStyle(document.documentElement)
+        .getPropertyValue('--electric')
+        .trim() || ELECTRIC_COLOR
+    );
+  });
+
+  useEffect(() => {
+    const read = () => {
+      const value = getComputedStyle(document.documentElement)
+        .getPropertyValue('--electric')
+        .trim();
+      if (value) setColor(value);
+    };
+
+    read();
+    const observer = new MutationObserver(read);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme'],
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  return color;
+}
+
 function hexToRgba(hex: string, alpha: number = 1): string {
   if (!hex) return `rgba(0,0,0,${alpha})`;
   let h = hex.replace('#', '');
@@ -39,7 +70,7 @@ interface ElectricBorderProps {
 
 export const ElectricBorder: React.FC<ElectricBorderProps> = ({
   children,
-  color = ELECTRIC_COLOR,
+  color,
   speed = 1,
   chaos = 0.12,
   borderRadius = 24,
@@ -57,6 +88,8 @@ export const ElectricBorder: React.FC<ElectricBorderProps> = ({
   const lastFrameTimeRef = useRef(0);
   const chaosTargetRef = useRef(chaos);
   const chaosCurrentRef = useRef(chaos);
+  const themeColor = useElectricColor();
+  const borderColor = color ?? themeColor;
 
   useEffect(() => {
     chaosTargetRef.current = chaos;
@@ -306,7 +339,7 @@ export const ElectricBorder: React.FC<ElectricBorderProps> = ({
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.scale(dpr, dpr);
 
-      ctx.strokeStyle = color;
+      ctx.strokeStyle = borderColor;
       ctx.lineWidth = 1;
       ctx.lineCap = 'round';
       ctx.lineJoin = 'round';
@@ -394,6 +427,7 @@ export const ElectricBorder: React.FC<ElectricBorderProps> = ({
   }, [
     active,
     color,
+    borderColor,
     speed,
     borderRadius,
     octavedNoise,
@@ -406,7 +440,7 @@ export const ElectricBorder: React.FC<ElectricBorderProps> = ({
       className={twMerge('relative isolate overflow-visible', className)}
       style={
         {
-          '--electric-border-color': color,
+          '--electric-border-color': borderColor,
           borderRadius,
           ...style,
         } as CSSProperties
@@ -428,19 +462,19 @@ export const ElectricBorder: React.FC<ElectricBorderProps> = ({
         <div
           className="pointer-events-none absolute inset-0 rounded-[inherit]"
           style={{
-            border: `2px solid ${hexToRgba(color, 0.6)}`,
+            border: `2px solid ${hexToRgba(borderColor, 0.6)}`,
             filter: 'blur(1px)',
           }}
         />
         <div
           className="pointer-events-none absolute inset-0 rounded-[inherit]"
-          style={{ border: `2px solid ${color}`, filter: 'blur(4px)' }}
+          style={{ border: `2px solid ${borderColor}`, filter: 'blur(4px)' }}
         />
         <div
           className="pointer-events-none absolute inset-0 -z-[1] scale-110 rounded-[inherit] opacity-30"
           style={{
             filter: 'blur(32px)',
-            background: `linear-gradient(-30deg, ${color}, transparent, ${color})`,
+            background: `linear-gradient(-30deg, ${borderColor}, transparent, ${borderColor})`,
           }}
         />
       </div>
@@ -469,7 +503,6 @@ export function ElectricHover({
 
   return (
     <ElectricBorder
-      color={ELECTRIC_COLOR}
       chaos={live ? ELECTRIC_HOVER_CHAOS : ELECTRIC_IDLE_CHAOS}
       active={live}
       borderRadius={borderRadius}

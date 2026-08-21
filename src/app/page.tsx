@@ -12,7 +12,7 @@ import Link from 'next/link';
 const CONTACT_EMAIL = 'verawebdev@protonmail.com';
 
 const ctaClass =
-  'inline-flex items-center gap-2 rounded-md bg-zinc-800 px-3 py-2 text-sm text-zinc-200 ring-1 ring-white/10 transition hover:bg-gradient-to-br hover:from-cyan-600 hover:to-blue-600 hover:text-white hover:ring-transparent';
+  'inline-flex items-center gap-2 rounded-md bg-surface-elevated px-3 py-2 text-sm text-heading-to ring-1 ring-foreground/10 transition hover:bg-gradient-to-br hover:from-cta-from hover:to-cta-to hover:text-cta-fg hover:ring-transparent';
 
 export const metadata: Metadata = {
   title: {
@@ -68,7 +68,7 @@ export default function Home() {
           </Heading>
           <Link
             href="/projects"
-            className="shrink-0 text-sm text-sky-400 transition hover:text-sky-300"
+            className="shrink-0 text-sm text-accent transition hover:text-accent-hover"
           >
             See all projects
           </Link>
@@ -83,7 +83,7 @@ export default function Home() {
           </Heading>
           <Link
             href="/travel"
-            className="shrink-0 text-sm text-sky-400 transition hover:text-sky-300"
+            className="shrink-0 text-sm text-accent transition hover:text-accent-hover"
           >
             See all
           </Link>
@@ -99,14 +99,14 @@ export default function Home() {
           Have a project, a role, or just want to say hi? Email me at{' '}
           <a
             href={`mailto:${CONTACT_EMAIL}`}
-            className="text-sky-400 underline underline-offset-2 hover:text-sky-300"
+            className="text-accent underline underline-offset-2 hover:text-accent-hover"
           >
             {CONTACT_EMAIL}
           </a>{' '}
           or{' '}
           <Link
             href="/contact"
-            className="text-sky-400 underline underline-offset-2 hover:text-sky-300"
+            className="text-accent underline underline-offset-2 hover:text-accent-hover"
           >
             send a message
           </Link>
