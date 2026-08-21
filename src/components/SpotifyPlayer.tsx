@@ -6,15 +6,19 @@ import {
   IconVolume,
   IconVolumeOff,
 } from '@tabler/icons-react';
+import dynamic from 'next/dynamic';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import type WaveSurfer from 'wavesurfer.js';
+
+const WavesurferPlayer = dynamic(() => import('@wavesurfer/react'), {
+  ssr: false,
+});
 
 const TRACK = {
   title: 'Ghost!',
   artist: 'Kid Cudi',
   src: encodeURI('/Kid Cudi-Ghost!.mp3'),
 };
-
-const BAR_COUNT = 72;
 
 const formatTime = (seconds: number) => {
   if (!Number.isFinite(seconds) || seconds < 0) return '0:00';
@@ -24,26 +28,20 @@ const formatTime = (seconds: number) => {
 };
 
 export const SpotifyPlayer = () => {
-  const audioRef = useRef<HTMLAudioElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const durationRef = useRef(0);
-  const progressInputRef = useRef<HTMLInputElement>(null);
+  const playerRef = useRef<HTMLDivElement>(null);
+  const wavesurferRef = useRef<WaveSurfer | null>(null);
   const currentTimeRef = useRef<HTMLSpanElement>(null);
   const durationLabelRef = useRef<HTMLSpanElement>(null);
-  const audioCtxRef = useRef<AudioContext | null>(null);
-  const analyserRef = useRef<AnalyserNode | null>(null);
-  const freqDataRef = useRef<Uint8Array | null>(null);
-  const rafRef = useRef(0);
-  const playerRef = useRef<HTMLDivElement>(null);
-  const graphReadyRef = useRef(false);
   const userPausedRef = useRef(false);
-  const isPlayingRef = useRef(false);
+  const volumeRef = useRef(0.8);
+  const mutedRef = useRef(false);
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [muted, setMuted] = useState(false);
   const [volume, setVolume] = useState(0.8);
 
-  isPlayingRef.current = isPlaying;
+  volumeRef.current = volume;
+  mutedRef.current = muted;
 
   useEffect(() => {
     const player = playerRef.current;
@@ -68,216 +66,68 @@ export const SpotifyPlayer = () => {
     };
   }, []);
 
-  const ensureAudioGraph = useCallback(() => {
-    const audio = audioRef.current;
-    if (!audio || graphReadyRef.current) return;
-
-    const AudioContextClass =
-      window.AudioContext ||
-      (window as typeof window & { webkitAudioContext?: typeof AudioContext })
-        .webkitAudioContext;
-    if (!AudioContextClass) return;
-
-    const ctx = new AudioContextClass();
-    const source = ctx.createMediaElementSource(audio);
-    const analyser = ctx.createAnalyser();
-    analyser.fftSize = 256;
-    analyser.smoothingTimeConstant = 0.72;
-    source.connect(analyser);
-    analyser.connect(ctx.destination);
-
-    audioCtxRef.current = ctx;
-    analyserRef.current = analyser;
-    freqDataRef.current = new Uint8Array(
-      analyser.frequencyBinCount,
-    ) as Uint8Array;
-    graphReadyRef.current = true;
-  }, []);
-
-  const drawVisualizer = useCallback(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    const dpr = window.devicePixelRatio || 1;
-    const width = canvas.clientWidth;
-    const height = canvas.clientHeight;
-    if (width === 0 || height === 0) return;
-
-    if (
-      canvas.width !== Math.floor(width * dpr) ||
-      canvas.height !== Math.floor(height * dpr)
-    ) {
-      canvas.width = Math.floor(width * dpr);
-      canvas.height = Math.floor(height * dpr);
-    }
-
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    ctx.clearRect(0, 0, width, height);
-
-    const analyser = analyserRef.current;
-    const freqs = freqDataRef.current;
-    const playing = Boolean(analyser && freqs && isPlayingRef.current);
-
-    if (playing && analyser && freqs) {
-      analyser.getByteFrequencyData(freqs as Uint8Array<ArrayBuffer>);
-    }
-
-    const duration = durationRef.current;
-    const time = audioRef.current?.currentTime ?? 0;
-    const progress = duration > 0 ? time / duration : 0;
-    const gap = 2;
-    const barWidth = Math.max(1.5, (width - gap * (BAR_COUNT - 1)) / BAR_COUNT);
-
-    for (let i = 0; i < BAR_COUNT; i++) {
-      const rest =
-        0.2 + Math.abs(Math.sin(i * 0.37) * 0.38 + Math.sin(i * 0.11) * 0.3);
-
-      let level = rest * 0.55;
-      if (playing && freqs) {
-        const bin = Math.min(
-          freqs.length - 1,
-          Math.floor((i / BAR_COUNT) * freqs.length * 0.65),
-        );
-        const energy = freqs[bin] / 255;
-        level = Math.max(0.12, rest * 0.22 + energy * 0.82);
-      }
-
-      const barHeight = Math.max(4, level * height);
-      const x = i * (barWidth + gap);
-      const y = (height - barHeight) / 2;
-      const played = i / BAR_COUNT <= progress;
-
-      ctx.fillStyle = played ? '#1DB954' : '#4d4d4d';
-      ctx.beginPath();
-      if (typeof ctx.roundRect === 'function') {
-        ctx.roundRect(x, y, barWidth, barHeight, 1);
-      } else {
-        ctx.rect(x, y, barWidth, barHeight);
-      }
-      ctx.fill();
-    }
-  }, []);
-
-  const updateProgress = (time: number) => {
-    if (progressInputRef.current) progressInputRef.current.value = String(time);
-    if (currentTimeRef.current) {
-      currentTimeRef.current.textContent = formatTime(time);
-    }
-    if (!isPlayingRef.current) {
-      drawVisualizer();
-    }
-  };
-
-  const stopVisualizer = useCallback(() => {
-    cancelAnimationFrame(rafRef.current);
-    drawVisualizer();
-  }, [drawVisualizer]);
-
-  const startVisualizer = useCallback(() => {
-    cancelAnimationFrame(rafRef.current);
-    const tick = () => {
-      drawVisualizer();
-      rafRef.current = requestAnimationFrame(tick);
-    };
-    tick();
-  }, [drawVisualizer]);
-
-  const connectAndPlay = useCallback(async () => {
-    const audio = audioRef.current;
-    if (!audio || userPausedRef.current) return;
+  const tryPlay = useCallback(async () => {
+    const wavesurfer = wavesurferRef.current;
+    if (!wavesurfer || userPausedRef.current) return;
 
     try {
-      await audio.play();
+      await wavesurfer.play();
     } catch {
       setIsPlaying(false);
     }
   }, []);
 
-  const unlockAudio = useCallback(async () => {
-    ensureAudioGraph();
-    if (audioCtxRef.current?.state === 'suspended') {
-      await audioCtxRef.current.resume();
-    }
-    await connectAndPlay();
-  }, [connectAndPlay, ensureAudioGraph]);
-
   useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    const start = () => {
-      void connectAndPlay();
-    };
-
-    if (audio.readyState >= 2) {
-      start();
-    } else {
-      audio.addEventListener('canplay', start, { once: true });
-    }
-
     const unlock = () => {
-      void unlockAudio();
+      void tryPlay();
     };
 
     window.addEventListener('pointerdown', unlock, { once: true });
     window.addEventListener('keydown', unlock, { once: true });
 
-    const onResize = () => drawVisualizer();
-    window.addEventListener('resize', onResize);
-    requestAnimationFrame(() => drawVisualizer());
-
     return () => {
-      audio.removeEventListener('canplay', start);
       window.removeEventListener('pointerdown', unlock);
       window.removeEventListener('keydown', unlock);
-      window.removeEventListener('resize', onResize);
-      cancelAnimationFrame(rafRef.current);
-      void audioCtxRef.current?.close();
-      audioCtxRef.current = null;
-      analyserRef.current = null;
-      graphReadyRef.current = false;
     };
-  }, [connectAndPlay, drawVisualizer, unlockAudio]);
+  }, [tryPlay]);
+
+  useEffect(() => {
+    wavesurferRef.current?.setVolume(muted ? 0 : volume);
+  }, [muted, volume]);
+
+  const onReady = useCallback(
+    (wavesurfer: WaveSurfer) => {
+      wavesurferRef.current = wavesurfer;
+      wavesurfer.setVolume(mutedRef.current ? 0 : volumeRef.current);
+
+      if (durationLabelRef.current) {
+        durationLabelRef.current.textContent = formatTime(
+          wavesurfer.getDuration(),
+        );
+      }
+
+      void tryPlay();
+    },
+    [tryPlay],
+  );
 
   const togglePlay = useCallback(async () => {
-    const audio = audioRef.current;
-    if (!audio) return;
+    const wavesurfer = wavesurferRef.current;
+    if (!wavesurfer) return;
 
-    if (audio.paused) {
-      userPausedRef.current = false;
-      await unlockAudio();
-    } else {
+    if (wavesurfer.isPlaying()) {
       userPausedRef.current = true;
-      audio.pause();
+      wavesurfer.pause();
+      return;
     }
-  }, [unlockAudio]);
 
-  const seek = (value: number) => {
-    const audio = audioRef.current;
-    if (!audio) return;
-    audio.currentTime = value;
-    updateProgress(value);
-  };
+    userPausedRef.current = false;
+    await tryPlay();
+  }, [tryPlay]);
 
   const changeVolume = (value: number) => {
-    const audio = audioRef.current;
-    if (!audio) return;
-    audio.volume = value;
     setVolume(value);
-    if (value > 0 && muted) {
-      audio.muted = false;
-      setMuted(false);
-    }
-  };
-
-  const toggleMute = () => {
-    const audio = audioRef.current;
-    if (!audio) return;
-    const nextMuted = !muted;
-    audio.muted = nextMuted;
-    setMuted(nextMuted);
+    if (value > 0 && muted) setMuted(false);
   };
 
   const volumePercent = muted ? 0 : volume * 100;
@@ -321,18 +171,32 @@ export const SpotifyPlayer = () => {
           >
             0:00
           </span>
-          <div className="group relative flex h-9 min-w-0 flex-1 items-center">
-            <canvas ref={canvasRef} className="h-9 w-full" aria-hidden />
-            <input
-              ref={progressInputRef}
-              type="range"
-              min={0}
-              max={0}
-              step={0.1}
-              defaultValue={0}
-              aria-label="Seek"
-              className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
-              onChange={(event) => seek(Number(event.target.value))}
+          <div className="h-9 min-w-0 flex-1">
+            <WavesurferPlayer
+              url={TRACK.src}
+              height={36}
+              barWidth={2}
+              barGap={2}
+              barRadius={2}
+              barMinHeight={1}
+              normalize
+              dragToSeek
+              hideScrollbar
+              waveColor="#4d4d4d"
+              progressColor="#1DB954"
+              cursorColor="#ffffff"
+              cursorWidth={1}
+              onReady={onReady}
+              onPlay={() => setIsPlaying(true)}
+              onPause={() => setIsPlaying(false)}
+              onTimeupdate={(_, time) => {
+                if (currentTimeRef.current) {
+                  currentTimeRef.current.textContent = formatTime(time);
+                }
+              }}
+              onFinish={(wavesurfer) => {
+                void wavesurfer.play();
+              }}
             />
           </div>
           <span
@@ -346,7 +210,7 @@ export const SpotifyPlayer = () => {
         <div className="hidden shrink-0 items-center justify-end gap-2 md:flex">
           <button
             type="button"
-            onClick={toggleMute}
+            onClick={() => setMuted((current) => !current)}
             aria-label={muted || volume === 0 ? 'Unmute' : 'Mute'}
             className="text-zinc-400 transition hover:text-white"
           >
@@ -379,40 +243,6 @@ export const SpotifyPlayer = () => {
           </div>
         </div>
       </div>
-
-      <audio
-        ref={audioRef}
-        src={TRACK.src}
-        preload="auto"
-        autoPlay
-        loop
-        playsInline
-        crossOrigin="anonymous"
-        onPlay={() => {
-          isPlayingRef.current = true;
-          setIsPlaying(true);
-          startVisualizer();
-        }}
-        onPause={() => {
-          isPlayingRef.current = false;
-          setIsPlaying(false);
-          stopVisualizer();
-        }}
-        onTimeUpdate={(event) =>
-          updateProgress(event.currentTarget.currentTime)
-        }
-        onLoadedMetadata={(event) => {
-          const audio = event.currentTarget;
-          const duration = String(audio.duration);
-          durationRef.current = audio.duration;
-          audio.volume = volume;
-          if (progressInputRef.current) progressInputRef.current.max = duration;
-          if (durationLabelRef.current) {
-            durationLabelRef.current.textContent = formatTime(audio.duration);
-          }
-          drawVisualizer();
-        }}
-      />
     </div>
   );
 };
