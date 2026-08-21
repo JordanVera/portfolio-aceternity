@@ -22,8 +22,14 @@ export default function Projects() {
       <span className="text-4xl">✉️</span>
       <Heading className="font-black mb-2">Contact Me</Heading>
       <Paragraph className="mb-10 max-w-xl">
-        Reach out to me over email or fill up this contact form. I will get back
-        to you ASAP - I promise.{' '}
+        Reach out over email at{' '}
+        <a
+          href="mailto:verawebdev@protonmail.com"
+          className="text-sky-400 hover:text-sky-300 underline underline-offset-2"
+        >
+          verawebdev@protonmail.com
+        </a>{' '}
+        or fill out this form. I will get back to you ASAP — I promise.
       </Paragraph>
       <Contact />
     </Container>
