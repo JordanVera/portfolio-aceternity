@@ -125,10 +125,23 @@ export default function About() {
               projects section
             </Link>
             , where you&apos;ll find my standout creations. Among them, I am
-            particularly proud of Legendary Barber Competition and Exterior Pro
-            Stack, which I consider to be my featured projects. These
-            applications have been the focal point of my efforts and have
-            allowed me to showcase my skills and dedication.
+            particularly proud of{' '}
+            <Link
+              href="/projects/legendary-barber"
+              className="text-accent hover:text-accent-hover"
+            >
+              Legendary Barber Competition
+            </Link>{' '}
+            and{' '}
+            <Link
+              href="/projects/exterior-pro-stack"
+              className="text-accent hover:text-accent-hover"
+            >
+              Exterior Pro Stack
+            </Link>
+            , which I consider to be my featured projects. These applications
+            have been the focal point of my efforts and have allowed me to
+            showcase my skills and dedication.
           </Paragraph>
           <Paragraph className=" mt-4">
             Thank you for taking the time to learn more about me. I am eager to
