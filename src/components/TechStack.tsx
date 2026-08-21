@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import React from 'react';
+import { ElectricHover } from './ElectricBorder';
 import { Heading } from './Heading';
 import { twMerge } from 'tailwind-merge';
 
@@ -310,26 +311,31 @@ export const TechStack = () => {
             <h3 className="text-sm text-zinc-400 pt-1.5">{category.name}</h3>
             <div className="flex flex-wrap gap-2">
               {category.items.map((item) => (
-                <a
+                <ElectricHover
                   key={`${category.name}-${item.title}`}
-                  href={item.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  title={item.title}
-                  className="inline-flex items-center gap-2 rounded-lg border border-zinc-700 bg-zinc-800 px-2.5 py-1.5 text-sm text-white transition-colors hover:bg-zinc-900"
+                  borderRadius={8}
+                  className="inline-flex rounded-lg"
                 >
-                  <Image
-                    src={item.src}
-                    width={20}
-                    height={20}
-                    alt=""
-                    className={twMerge(
-                      'h-4 w-4 object-contain',
-                      item.invert && 'brightness-0 invert',
-                    )}
-                  />
-                  <span>{item.title}</span>
-                </a>
+                  <a
+                    href={item.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title={item.title}
+                    className="inline-flex items-center gap-2 rounded-lg border border-zinc-700 bg-zinc-800 px-2.5 py-1.5 text-sm text-white"
+                  >
+                    <Image
+                      src={item.src}
+                      width={20}
+                      height={20}
+                      alt=""
+                      className={twMerge(
+                        'h-4 w-4 object-contain',
+                        item.invert && 'brightness-0 invert',
+                      )}
+                    />
+                    <span>{item.title}</span>
+                  </a>
+                </ElectricHover>
               ))}
             </div>
           </section>
