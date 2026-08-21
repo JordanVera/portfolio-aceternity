@@ -1,8 +1,12 @@
 'use client';
 
 import type { CSSProperties, ReactNode } from 'react';
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
+
+export const ELECTRIC_COLOR = '#0ea5e9';
+export const ELECTRIC_IDLE_CHAOS = 0.008;
+export const ELECTRIC_HOVER_CHAOS = 0.03;
 
 function hexToRgba(hex: string, alpha: number = 1): string {
   if (!hex) return `rgba(0,0,0,${alpha})`;
@@ -35,7 +39,7 @@ interface ElectricBorderProps {
 
 export const ElectricBorder: React.FC<ElectricBorderProps> = ({
   children,
-  color = '#0ea5e9',
+  color = ELECTRIC_COLOR,
   speed = 1,
   chaos = 0.12,
   borderRadius = 24,
@@ -444,3 +448,37 @@ export const ElectricBorder: React.FC<ElectricBorderProps> = ({
     </div>
   );
 };
+
+interface ElectricHoverProps {
+  children?: ReactNode;
+  borderRadius?: number;
+  className?: string;
+  disabled?: boolean;
+  style?: CSSProperties;
+}
+
+export function ElectricHover({
+  children,
+  borderRadius = 12,
+  className,
+  disabled = false,
+  style,
+}: ElectricHoverProps) {
+  const [hovered, setHovered] = useState(false);
+  const live = hovered && !disabled;
+
+  return (
+    <ElectricBorder
+      color={ELECTRIC_COLOR}
+      chaos={live ? ELECTRIC_HOVER_CHAOS : ELECTRIC_IDLE_CHAOS}
+      active={live}
+      borderRadius={borderRadius}
+      className={className}
+      style={style}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      {children}
+    </ElectricBorder>
+  );
+}

@@ -1,4 +1,5 @@
 import { Container } from '@/components/Container';
+import { ElectricHover } from '@/components/ElectricBorder';
 import { FeaturedWork } from '@/components/FeaturedWork';
 import { Heading } from '@/components/Heading';
 import { Highlight } from '@/components/Highlight';
@@ -11,7 +12,7 @@ import Link from 'next/link';
 const CONTACT_EMAIL = 'verawebdev@protonmail.com';
 
 const ctaClass =
-  'inline-flex items-center gap-2 rounded-md bg-zinc-800 px-3 py-2 text-sm text-zinc-200 ring-1 ring-white/10 transition hover:bg-zinc-700 hover:text-white';
+  'inline-flex items-center gap-2 rounded-md bg-zinc-800 px-3 py-2 text-sm text-zinc-200 ring-1 ring-white/10 transition hover:bg-gradient-to-br hover:from-cyan-600 hover:to-blue-600 hover:text-white hover:ring-transparent';
 
 export const metadata: Metadata = {
   title: 'Jordan Vera - Developer',
@@ -38,19 +39,25 @@ export default function Home() {
         Chiefs.
       </Paragraph>
 
-      <div className="mt-8 flex flex-wrap items-center gap-3">
-        <Link href="#featured" className={ctaClass}>
-          <IconBriefcase2 className="h-4 w-4" />
-          See work
-        </Link>
-        <Link href="/contact" className={ctaClass}>
-          <IconMail className="h-4 w-4" />
-          Contact
-        </Link>
-        <Link href="/resume" className={ctaClass}>
-          <IconScript className="h-4 w-4" />
-          Resume
-        </Link>
+      <div className="mt-8 flex flex-wrap items-center gap-4">
+        <ElectricHover borderRadius={6} className="rounded-md">
+          <Link href="#featured" className={ctaClass}>
+            <IconBriefcase2 className="h-4 w-4" />
+            See work
+          </Link>
+        </ElectricHover>
+        <ElectricHover borderRadius={6} className="rounded-md">
+          <Link href="/contact" className={ctaClass}>
+            <IconMail className="h-4 w-4" />
+            Contact
+          </Link>
+        </ElectricHover>
+        <ElectricHover borderRadius={6} className="rounded-md">
+          <Link href="/resume" className={ctaClass}>
+            <IconScript className="h-4 w-4" />
+            Resume
+          </Link>
+        </ElectricHover>
       </div>
 
       <section id="featured" className="scroll-mt-8">

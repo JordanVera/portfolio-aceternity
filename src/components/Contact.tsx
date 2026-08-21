@@ -1,4 +1,5 @@
 'use client';
+import { ElectricHover } from '@/components/ElectricBorder';
 import React, { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import {
@@ -158,13 +159,19 @@ export const Contact = () => {
           />
         </div>
 
-        <button
-          className="w-full px-2 py-2 mt-4 bg-sky-600 hover:bg-sky-500 rounded-md font-bold text-white disabled:opacity-40 disabled:hover:bg-sky-600 disabled:cursor-not-allowed transition-colors"
-          type="submit"
+        <ElectricHover
+          borderRadius={6}
+          className="mt-4 w-full rounded-md"
           disabled={!isComplete || status === 'submitting'}
         >
-          {status === 'submitting' ? 'Sending...' : 'Submit'}
-        </button>
+          <button
+            className="w-full px-2 py-2 bg-sky-600 hover:bg-sky-500 rounded-md font-bold text-white disabled:opacity-40 disabled:hover:bg-sky-600 disabled:cursor-not-allowed transition-colors"
+            type="submit"
+            disabled={!isComplete || status === 'submitting'}
+          >
+            {status === 'submitting' ? 'Sending...' : 'Submit'}
+          </button>
+        </ElectricHover>
       </form>
 
       <Toast toast={toast} onDismiss={() => setToast(null)} />

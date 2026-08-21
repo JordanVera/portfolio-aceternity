@@ -1,4 +1,5 @@
 import { Container } from '@/components/Container';
+import { ElectricHover } from '@/components/ElectricBorder';
 import { Heading } from '@/components/Heading';
 import { Highlight } from '@/components/Highlight';
 import { Paragraph } from '@/components/Paragraph';
@@ -29,14 +30,16 @@ export default function Home() {
         millions of lives
       </Paragraph>
       <WorkHistory />
-      <Link
-        href="/webDevResume.pdf"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-block text-center text-white font-bold bg-gradient-to-br from-cyan-600 to-blue-600 w-full p-2 rounded-lg hover:opacity-90 transition-opacity"
-      >
-        Download Full Resume
-      </Link>
+      <ElectricHover borderRadius={8} className="w-full rounded-lg">
+        <Link
+          href="/webDevResume.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block text-center text-white font-bold bg-gradient-to-br from-cyan-600 to-blue-600 w-full p-2 rounded-lg hover:opacity-90 transition-opacity"
+        >
+          Download Full Resume
+        </Link>
+      </ElectricHover>
       <TechStack />
     </Container>
   );
