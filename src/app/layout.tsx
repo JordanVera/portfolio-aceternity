@@ -34,8 +34,8 @@ export default function RootLayout({
       >
         <Sidebar />
         <div className="lg:pl-2 lg:pt-2 bg-black flex-1 overflow-y-auto">
-          <div className="flex-1 bg-zinc-900 min-h-screen lg:rounded-tl-xl  overflow-y-auto">
-            {children}
+          <div className="flex flex-col flex-1 bg-zinc-900 min-h-screen lg:rounded-tl-xl overflow-y-auto">
+            <div className="flex-1">{children}</div>
             <Footer />
           </div>
         </div>
