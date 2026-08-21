@@ -167,10 +167,10 @@ export const Navigation = ({
 const SidebarHeader = () => {
   return (
     <div className="flex items-center space-x-2">
-      <Avatar src="/images/avatar.png" alt="Jordan Vera" size={60} />
+      <Avatar src="/images/avatar.png" alt="Jordan Vera" size={50} />
       <div className="flex text-sm flex-col">
         <p className="font-bold text-white">Jordan Vera</p>
-        <p className="font-light text-zinc-300">Web Developer</p>
+        <p className="font-light text-zinc-300 text-xs">Fullstack Developer</p>
       </div>
     </div>
   );

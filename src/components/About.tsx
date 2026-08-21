@@ -6,6 +6,7 @@ import Image from 'next/image';
 
 import { motion } from 'motion/react';
 import Link from 'next/link';
+import { useEffect, useRef } from 'react';
 
 const RIOT_TRACK = {
   title: 'Riot!',
@@ -31,15 +32,40 @@ function getAge(birthDate: Date): number {
 
 export default function About() {
   const age = getAge(new Date(1996, 3, 24));
+  const skylineRef = useRef<HTMLDivElement>(null);
   const images = [
     '/images/selfie.jpg',
     '/images/texas.jpg',
     '/images/paris.jpg',
     '/images/code.jpeg',
   ];
+
+  useEffect(() => {
+    const skyline = skylineRef.current;
+    const panel = skyline?.closest('.bg-zinc-900') as HTMLElement | null;
+    if (!skyline || !panel) return;
+
+    const syncToMain = () => {
+      const rect = panel.getBoundingClientRect();
+      skyline.style.left = `${rect.left}px`;
+      skyline.style.width = `${rect.width}px`;
+      skyline.style.right = 'auto';
+    };
+
+    syncToMain();
+    const observer = new ResizeObserver(syncToMain);
+    observer.observe(panel);
+    window.addEventListener('resize', syncToMain);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('resize', syncToMain);
+    };
+  }, []);
+
   return (
     <>
-      <div>
+      <div className="relative z-10">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10 my-10">
           {images.map((image, index) => (
             <motion.div
@@ -91,7 +117,7 @@ export default function About() {
             tensorflow.js.
           </Paragraph>
 
-          <Paragraph className=" mt-4">
+          <Paragraph className="mt-4">
             I invite you to explore my website&apos;s{' '}
             <Link
               href="/projects"
@@ -112,6 +138,22 @@ export default function About() {
           </Paragraph>
         </div>
       </div>
+      <motion.div
+        ref={skylineRef}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.2, delay: 0.45 }}
+        className="pointer-events-none fixed bottom-[calc(72px+env(safe-area-inset-bottom))] left-0 right-0 z-0 select-none lg:left-[14rem]"
+        aria-hidden
+      >
+        <Image
+          src="/houston-skyline.png"
+          alt=""
+          width={350}
+          height={133}
+          className="block h-auto w-full opacity-50"
+        />
+      </motion.div>
       <div className="h-[calc(72px+env(safe-area-inset-bottom))]" aria-hidden />
       <SpotifyPlayer track={RIOT_TRACK} />
     </>
