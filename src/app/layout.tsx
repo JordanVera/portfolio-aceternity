@@ -12,9 +12,12 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'Jordan Vera - Developer',
+  title: {
+    default: 'Jordan Vera - Developer',
+    template: '%s | Jordan Vera',
+  },
   description:
-    'John Doe is a developer, writer and speaker. He is a digital nomad and travels around the world while working remotely.',
+    'Jordan Vera is a fullstack developer in Houston building products like Legendary Barber Competition and Exterior Pro Stack.',
   icons: {
     icon: '/images/logoWhite.svg',
   },

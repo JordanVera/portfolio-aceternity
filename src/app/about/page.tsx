@@ -10,9 +10,9 @@ import { motion } from 'motion/react';
 import About from '@/components/About';
 
 export const metadata: Metadata = {
-  title: 'About | Jordan Vera',
+  title: 'About',
   description:
-    'John Doe is a developer, writer and speaker. He is a digital nomad and travels around the world while working remotely.',
+    'Jordan Vera is a fullstack developer from Houston. UT Austin Coding Bootcamp alum, currently building products like Legendary Barber Competition and Exterior Pro Stack.',
   icons: {
     icon: '/images/logoWhite.svg',
   },

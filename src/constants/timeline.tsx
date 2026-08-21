@@ -2,7 +2,7 @@ export const timeline = [
   {
     company: 'The Lighthouse Church',
     title: 'Full Stack Developer',
-    date: '2025 - Present',
+    date: '2025 - 2026',
     description: 'Building the future of interactive digital publications',
     responsibilities: [
       'Manage and build out the internal church website',

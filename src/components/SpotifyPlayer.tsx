@@ -18,7 +18,7 @@ export type SpotifyTrack = {
   title: string;
   artist: string;
   src: string;
-  cover?: 'ghost' | 'riot';
+  cover?: 'ghost' | 'riot' | 'dancin' | 'aruarian';
 };
 
 const formatTime = (seconds: number) => {
@@ -248,7 +248,11 @@ export const SpotifyPlayer = ({ track }: { track: SpotifyTrack }) => {
   );
 };
 
-const AlbumArt = ({ variant }: { variant: 'ghost' | 'riot' }) => {
+const AlbumArt = ({
+  variant,
+}: {
+  variant: 'ghost' | 'riot' | 'dancin' | 'aruarian';
+}) => {
   const gradientId = `album-sky-${useId().replace(/:/g, '')}`;
 
   return (
@@ -271,6 +275,52 @@ const AlbumArt = ({ variant }: { variant: 'ghost' | 'riot' }) => {
           <path
             d="M20 28 C24 18 30 14 32 8 C34 16 40 20 44 28 C38 26 34 30 32 36 C30 30 26 26 20 28 Z"
             fill="#ef4444"
+          />
+        </svg>
+      ) : variant === 'dancin' ? (
+        <svg viewBox="0 0 64 64" className="h-full w-full">
+          <defs>
+            <radialGradient id={gradientId} cx="50%" cy="80%" r="80%">
+              <stop offset="0%" stopColor="#6b21a8" />
+              <stop offset="55%" stopColor="#3b0764" />
+              <stop offset="100%" stopColor="#09090b" />
+            </radialGradient>
+          </defs>
+          <rect width="64" height="64" fill={`url(#${gradientId})`} />
+          <circle
+            cx="32"
+            cy="32"
+            r="18"
+            fill="#18181b"
+            stroke="#d4d4d8"
+            strokeWidth="1.5"
+          />
+          <circle
+            cx="32"
+            cy="32"
+            r="12"
+            fill="none"
+            stroke="#a1a1aa"
+            strokeWidth="0.75"
+          />
+          <circle cx="32" cy="32" r="5" fill="#e879f9" />
+          <circle cx="32" cy="32" r="1.75" fill="#09090b" />
+        </svg>
+      ) : variant === 'aruarian' ? (
+        <svg viewBox="0 0 64 64" className="h-full w-full">
+          <defs>
+            <radialGradient id={gradientId} cx="50%" cy="70%" r="80%">
+              <stop offset="0%" stopColor="#c2410c" />
+              <stop offset="55%" stopColor="#7c2d12" />
+              <stop offset="100%" stopColor="#09090b" />
+            </radialGradient>
+          </defs>
+          <rect width="64" height="64" fill={`url(#${gradientId})`} />
+          <circle cx="32" cy="26" r="14" fill="#ea580c" />
+          <circle cx="32" cy="26" r="8" fill="#fb923c" />
+          <path
+            d="M0 50 Q16 40 32 48 T64 44 L64 64 L0 64 Z"
+            fill="#1c1917"
           />
         </svg>
       ) : (

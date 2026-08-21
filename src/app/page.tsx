@@ -15,9 +15,11 @@ const ctaClass =
   'inline-flex items-center gap-2 rounded-md bg-zinc-800 px-3 py-2 text-sm text-zinc-200 ring-1 ring-white/10 transition hover:bg-gradient-to-br hover:from-cyan-600 hover:to-blue-600 hover:text-white hover:ring-transparent';
 
 export const metadata: Metadata = {
-  title: 'Jordan Vera - Developer',
+  title: {
+    absolute: 'Jordan Vera - Developer',
+  },
   description:
-    'Jordan Vera is a fullstack developer in Houston building products like Exterior Pro Stack and NFL Last Longer.',
+    'Jordan Vera is a fullstack developer in Houston building products like Legendary Barber Competition and Exterior Pro Stack.',
   icons: {
     icon: '/images/logoWhite.svg',
   },
@@ -30,9 +32,9 @@ export default function Home() {
       <Heading className="font-black">Hello there! I&apos;m Jordan</Heading>
       <Paragraph className="mt-4 max-w-xl">
         I&apos;m a fullstack developer in Houston building products like{' '}
-        <Highlight>Exterior Pro Stack</Highlight> and{' '}
-        <Highlight>NFL Last Longer</Highlight> — web, native, and the APIs
-        underneath.
+        <Highlight>Legendary Barber Competition</Highlight> and{' '}
+        <Highlight>Exterior Pro Stack</Highlight> — branded sites, web,
+        native, and the APIs underneath.
       </Paragraph>
       <Paragraph className="mt-4 max-w-xl">
         Beyond the keyboard I like live music, traveling, and the Kansas City

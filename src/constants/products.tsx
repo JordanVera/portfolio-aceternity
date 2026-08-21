@@ -5,8 +5,40 @@ import rps from 'public/images/projects/rps.png';
 import countries from 'public/images/projects/countries.png';
 import pomodoro from 'public/images/projects/pomodoro.png';
 import exteriorProStack from 'public/images/projects/exterior-pro-stack.png';
+import legendaryBarber from 'public/images/projects/legendary-barber.png';
 
 export const products = [
+  {
+    href: 'https://www.legendarybarbercompetition.com/',
+    title: 'Legendary Barber Competition',
+    description:
+      'An invite-only event site for Shedeur Sanders, Cleveland Browns quarterback, spotlighting elite barber talent and craft.',
+    thumbnail: legendaryBarber,
+    images: [legendaryBarber, legendaryBarber],
+    stack: ['Nextjs', 'Tailwindcss'],
+    slug: 'legendary-barber',
+    content: (
+      <div className="text-white">
+        <p>
+          Legendary Barber Competition is a branded event site I built for
+          Shedeur Sanders, NFL quarterback for the Cleveland Browns. The
+          competition is a private, invite-only experience in Cleveland that
+          puts elite barber talent, creativity, and craftsmanship on stage —
+          with selected barbers competing for the title of Shedeur Sanders&apos;
+          Official Barber for the upcoming football season.
+        </p>
+        <p>
+          The site is a dark, gold-accented Next.js marketing experience:
+          Shedeur&apos;s bio and socials, competition details, a three-step
+          Apply / Get Selected / Compete process, partner logos, and a
+          submission flow for Cleveland-area barbers. It needed to feel
+          premium enough for an athlete-backed brand while still making the
+          event logistics — date, location, access, and deadline — immediately
+          clear.
+        </p>
+      </div>
+    ),
+  },
   {
     href: 'https://exterior-pro-stack.vercel.app/',
     title: 'Exterior Pro Stack',

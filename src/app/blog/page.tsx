@@ -8,9 +8,9 @@ import { Blogs } from '@/components/Blogs';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Blogs | Jordan Vera',
+  title: 'Blog',
   description:
-    'John Doe is a developer, writer and speaker. He is a digital nomad and travels around the world while working remotely.',
+    'Writing from Jordan Vera on React, Next.js, Tailwind CSS, and shipping software.',
   icons: {
     icon: '/images/logoWhite.svg',
   },

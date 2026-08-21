@@ -8,7 +8,7 @@ import { motion } from 'motion/react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const FEATURED_SLUGS = ['exterior-pro-stack', 'nfl-last-longer'];
+const FEATURED_SLUGS = ['legendary-barber', 'exterior-pro-stack'];
 
 export const FeaturedWork = () => {
   const featured = FEATURED_SLUGS.flatMap((slug) => {
