@@ -294,10 +294,10 @@ const categories: TechCategory[] = [
 
 export const TechStack = () => {
   return (
-    <div>
+    <div className="relative z-10">
       <Heading
         as="h2"
-        className="font-black text-3xl md:text-4xl lg:text-4xl mt-20 mb-8"
+        className="font-black text-3xl md:text-4xl lg:text-4xl mt-8 mb-8"
       >
         Tech Stack
       </Heading>
@@ -307,7 +307,7 @@ export const TechStack = () => {
             key={category.name}
             className="grid grid-cols-1 sm:grid-cols-[11.5rem_1fr] gap-3 sm:gap-6 py-5"
           >
-            <h3 className="text-sm text-zinc-500 pt-1.5">{category.name}</h3>
+            <h3 className="text-sm text-zinc-400 pt-1.5">{category.name}</h3>
             <div className="flex flex-wrap gap-2">
               {category.items.map((item) => (
                 <a
@@ -316,7 +316,7 @@ export const TechStack = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   title={item.title}
-                  className="inline-flex items-center gap-2 rounded-lg bg-zinc-800 px-2.5 py-1.5 text-sm text-zinc-100 transition-colors hover:bg-zinc-700"
+                  className="inline-flex items-center gap-2 rounded-lg border border-zinc-700 bg-zinc-800 px-2.5 py-1.5 text-sm text-white transition-colors hover:bg-zinc-900"
                 >
                   <Image
                     src={item.src}
