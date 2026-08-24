@@ -9,7 +9,7 @@ import {
 } from '@tabler/icons-react';
 
 const CONTACT_EMAIL = 'verawebdev@protonmail.com';
-const FORMSUBMIT_URL = `https://formsubmit.co/ajax/${CONTACT_EMAIL}`;
+const FORMSUBMIT_URL = `FORMSUBMIT_URL/${CONTACT_EMAIL}`;
 
 const defaultFormState = {
   name: {
