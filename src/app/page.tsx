@@ -1,11 +1,17 @@
+import { BeyondTheKeyboard } from '@/components/BeyondTheKeyboard';
 import { Container } from '@/components/Container';
 import { ElectricHover } from '@/components/ElectricBorder';
+import { ExperienceSnapshot } from '@/components/ExperienceSnapshot';
 import { FeaturedWork } from '@/components/FeaturedWork';
 import { Heading } from '@/components/Heading';
-import { Highlight } from '@/components/Highlight';
+import { HomeHero } from '@/components/HomeHero';
+import { HomeStats } from '@/components/HomeStats';
 import { Paragraph } from '@/components/Paragraph';
+import { SectionHeading } from '@/components/SectionHeading';
+import { TechMarquee } from '@/components/TechMarquee';
 import { TravelTeaser } from '@/components/TravelTeaser';
-import { IconBriefcase2, IconMail, IconScript } from '@tabler/icons-react';
+import { WhatIDo } from '@/components/WhatIDo';
+import { IconMail, IconScript } from '@tabler/icons-react';
 import { Metadata } from 'next';
 import Link from 'next/link';
 
@@ -16,10 +22,10 @@ const ctaClass =
 
 export const metadata: Metadata = {
   title: {
-    absolute: 'Jordan Vera - Developer',
+    absolute: 'Jordan Vera - Fullstack Developer in Houston',
   },
   description:
-    'Jordan Vera is a fullstack developer in Houston building products like Legendary Barber Competition and Exterior Pro Stack.',
+    'Jordan Vera is a fullstack developer in Houston building web and native products like Legendary Barber Competition and Exterior Pro Stack with Next.js, React Native, and Node.',
   icons: {
     icon: '/images/logoWhite.svg',
   },
@@ -28,90 +34,100 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <Container>
-      <span className="text-4xl">👋</span>
-      <Heading className="font-black">Hello there! I&apos;m Jordan</Heading>
-      <Paragraph className="mt-4 max-w-xl">
-        I&apos;m a fullstack developer in Houston building products like{' '}
-        <Highlight>Legendary Barber Competition</Highlight> and{' '}
-        <Highlight>Exterior Pro Stack</Highlight> — branded sites, web, native,
-        and the APIs underneath.
-      </Paragraph>
-      <Paragraph className="mt-4 max-w-xl">
-        Beyond the keyboard I like live music, traveling, and LSU football.
-      </Paragraph>
+      <HomeHero />
 
-      <div className="mt-8 flex flex-wrap items-center gap-4">
-        <ElectricHover borderRadius={6} className="rounded-md">
-          <Link href="#featured" className={ctaClass}>
-            <IconBriefcase2 className="h-4 w-4" />
-            See work
-          </Link>
-        </ElectricHover>
-        <ElectricHover borderRadius={6} className="rounded-md">
-          <Link href="/contact" className={ctaClass}>
-            <IconMail className="h-4 w-4" />
-            Contact
-          </Link>
-        </ElectricHover>
-        <ElectricHover borderRadius={6} className="rounded-md">
-          <Link href="/resume" className={ctaClass}>
-            <IconScript className="h-4 w-4" />
-            Resume
-          </Link>
-        </ElectricHover>
-      </div>
+      <section className="mt-16">
+        <HomeStats />
+      </section>
 
-      <section id="featured" className="scroll-mt-8">
-        <div className="mb-6 mt-20 flex items-end justify-between gap-4">
-          <Heading as="h2" className="font-black text-lg md:text-lg lg:text-lg">
-            Selected work
-          </Heading>
-          <Link
-            href="/projects"
-            className="shrink-0 text-sm text-accent transition hover:text-accent-hover"
-          >
-            See all projects
-          </Link>
-        </div>
+      <section className="mt-20">
+        <SectionHeading
+          title="What I do"
+          description="I work across the whole stack, which usually means I can take a feature from a sketch to something running in production without a handoff."
+        />
+        <WhatIDo />
+      </section>
+
+      <section id="featured" className="mt-20 scroll-mt-8">
+        <SectionHeading
+          title="Selected work"
+          description="Two products I have spent the most time on recently."
+          actionHref="/projects"
+          actionLabel="See all projects"
+        />
         <FeaturedWork />
       </section>
 
       <section className="mt-20">
-        <div className="mb-6 flex items-end justify-between gap-4">
-          <Heading as="h2" className="font-black text-lg md:text-lg lg:text-lg">
-            From the road
-          </Heading>
-          <Link
-            href="/travel"
-            className="shrink-0 text-sm text-accent transition hover:text-accent-hover"
-          >
-            See all
-          </Link>
-        </div>
+        <SectionHeading
+          title="Tools I reach for"
+          description="The stack I am fastest in, plus whatever the problem actually needs."
+          actionHref="/about"
+          actionLabel="Full tech stack"
+        />
+        <TechMarquee />
+      </section>
+
+      <section className="mt-20">
+        <SectionHeading
+          title="Where I have worked"
+          actionHref="/resume"
+          actionLabel="Full resume"
+        />
+        <ExperienceSnapshot />
+      </section>
+
+      <section className="mt-20">
+        <SectionHeading
+          title="Beyond the keyboard"
+          description="The stuff that makes up the rest of my week."
+          actionHref="/about"
+          actionLabel="More about me"
+        />
+        <BeyondTheKeyboard />
+      </section>
+
+      <section className="mt-20">
+        <SectionHeading
+          title="From the road"
+          actionHref="/travel"
+          actionLabel="See all"
+        />
         <TravelTeaser />
       </section>
 
       <section className="mt-20">
-        <Heading as="h2" className="font-black text-lg md:text-lg lg:text-lg">
-          Let&apos;s talk
-        </Heading>
-        <Paragraph className="mt-4 max-w-xl">
-          Have a project, a role, or just want to say hi? Email me at{' '}
-          <a
-            href={`mailto:${CONTACT_EMAIL}`}
-            className="text-accent underline underline-offset-2 hover:text-accent-hover"
-          >
-            {CONTACT_EMAIL}
-          </a>{' '}
-          or{' '}
-          <Link
-            href="/contact"
-            className="text-accent underline underline-offset-2 hover:text-accent-hover"
-          >
-            send a message
-          </Link>
-          .
-        </Paragraph>
+        <ElectricHover borderRadius={12} className="rounded-xl">
+          <div className="rounded-xl bg-surface-elevated/40 p-6 ring-1 ring-foreground/10 md:p-8">
+            <Heading
+              as="h2"
+              className="font-black text-lg md:text-xl lg:text-2xl"
+            >
+              Let&apos;s build something
+            </Heading>
+            <Paragraph className="mt-3 max-w-xl">
+              Have a project, a role, or just want to say hi? I read everything
+              that lands in my inbox. Reach me at{' '}
+              <a
+                href={`mailto:${CONTACT_EMAIL}`}
+                className="text-accent underline underline-offset-2 hover:text-accent-hover"
+              >
+                {CONTACT_EMAIL}
+              </a>
+              .
+            </Paragraph>
+            <div className="mt-6 flex flex-wrap items-center gap-4">
+              <Link href="/contact" className={ctaClass}>
+                <IconMail className="h-4 w-4" />
+                Send a message
+              </Link>
+              <Link href="/resume" className={ctaClass}>
+                <IconScript className="h-4 w-4" />
+                Read my resume
+              </Link>
+            </div>
+          </div>
+        </ElectricHover>
       </section>
     </Container>
   );
