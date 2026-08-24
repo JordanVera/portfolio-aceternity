@@ -170,7 +170,7 @@ export const HomeHero = () => {
         className="order-first shrink-0 md:order-none md:pt-10"
       >
         <ElectricHover borderRadius={12} className="rounded-xl">
-          <div className="overflow-hidden rounded-xl ring-1 ring-foreground/10">
+          <div className="overflow-hidden rounded-xl ring-1 ring-foreground/10 hidden md:block">
             <Image
               src="/images/travel/2993DA8B-15E9-4C03-B18D-A32647CB180E_1_102_o.jpeg"
               alt="Jordan Vera"
