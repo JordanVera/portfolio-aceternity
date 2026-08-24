@@ -172,7 +172,7 @@ export const HomeHero = () => {
         <ElectricHover borderRadius={12} className="rounded-xl">
           <div className="overflow-hidden rounded-xl ring-1 ring-foreground/10">
             <Image
-              src="/images/selfie.jpg"
+              src="/images/travel/2993DA8B-15E9-4C03-B18D-A32647CB180E_1_102_o.jpeg"
               alt="Jordan Vera"
               width={480}
               height={600}
