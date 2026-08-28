@@ -108,6 +108,11 @@ const categories: TechCategory[] = [
         invert: true,
       },
       {
+        title: 'NestJS',
+        src: '/images/logos/nestjs.svg',
+        link: 'https://nestjs.com/',
+      },
+      {
         title: 'MongoDB',
         src: '/images/logos/mongodb-colored.svg',
         link: 'https://www.mongodb.com/',
@@ -308,7 +313,9 @@ export const TechStack = () => {
             key={category.name}
             className="grid grid-cols-1 sm:grid-cols-[11.5rem_1fr] gap-3 sm:gap-6 py-5"
           >
-            <h3 className="text-sm text-foreground-subtle pt-1.5">{category.name}</h3>
+            <h3 className="text-sm text-foreground-subtle pt-1.5">
+              {category.name}
+            </h3>
             <div className="flex flex-wrap gap-2">
               {category.items.map((item) => (
                 <ElectricHover
