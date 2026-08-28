@@ -76,7 +76,7 @@ export const HomeHero = () => {
           Open to new projects and roles
         </motion.span>
 
-        <span className="mt-4 block text-4xl">👋</span>
+        {/* <span className="mt-4 block text-4xl">👋</span> */}
         <div className="mt-1 flex items-center gap-2">
           {/* <Heading className="font-black">Hello there! I&apos;m</Heading> */}
           <JordanVeraLogo
