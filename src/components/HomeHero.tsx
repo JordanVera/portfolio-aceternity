@@ -2,6 +2,7 @@
 
 import { ElectricHover } from '@/components/ElectricBorder';
 import { Heading } from '@/components/Heading';
+import { JordanVeraLogo } from '@/components/JordanVeraLogo';
 import { Highlight } from '@/components/Highlight';
 import { Paragraph } from '@/components/Paragraph';
 import { socials } from '@/constants/socials';
@@ -76,7 +77,13 @@ export const HomeHero = () => {
         </motion.span>
 
         <span className="mt-4 block text-4xl">👋</span>
-        <Heading className="font-black">Hello there! I&apos;m Jordan</Heading>
+        <div className="mt-1 flex items-center gap-2">
+          {/* <Heading className="font-black">Hello there! I&apos;m</Heading> */}
+          <JordanVeraLogo
+            priority
+            className="h-10 sm:h-12 md:h-14 lg:h-16 max-w-[min(100%,28rem)]"
+          />
+        </div>
 
         <p className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-foreground-subtle">
           <span>Fullstack Developer</span>

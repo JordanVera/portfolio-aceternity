@@ -86,6 +86,18 @@ html[data-theme='lsu'] .theme-logo-invert {
   filter: brightness(0) invert(1);
 }
 
+.jordan-vera-logo-white,
+.jordan-vera-logo-black,
+.jordan-vera-logo-gold {
+  display: none;
+}
+
+html[data-theme='dark'] .jordan-vera-logo-white,
+html[data-theme='light'] .jordan-vera-logo-black,
+html[data-theme='lsu'] .jordan-vera-logo-gold {
+  display: block;
+}
+
 html[data-theme='light'] .skyline-art {
   opacity: 0.18;
   filter: grayscale(1);
