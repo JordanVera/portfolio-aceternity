@@ -107,3 +107,26 @@ html[data-theme='light'] .skyline-art {
   background: rgb(var(--accent) / 0.35);
   color: rgb(var(--foreground));
 }
+
+@keyframes preloader-logo-float {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.88;
+  }
+
+  50% {
+    transform: translateY(-6px);
+    opacity: 1;
+  }
+}
+
+.preloader-logo-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.preloader-logo {
+  animation: preloader-logo-float 2.5s ease-in-out infinite;
+}

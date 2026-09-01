@@ -1,5 +1,6 @@
 import './globals.css';
 import { Footer } from '@/components/Footer';
+import { MainPanelLoader } from '@/components/MainPanelLoader';
 import { PageTransition } from '@/components/PageTransition';
 import { Sidebar } from '@/components/Sidebar';
 import { ThemeProvider } from '@/components/ThemeProvider';
@@ -49,10 +50,10 @@ export default function RootLayout({
         <ThemeProvider>
           <Sidebar />
           <PageTransition>
-            <div className="js-main-panel flex flex-col flex-1 bg-surface min-h-screen lg:rounded-tl-xl overflow-y-auto">
+            <MainPanelLoader>
               <div className="flex-1">{children}</div>
               <Footer />
-            </div>
+            </MainPanelLoader>
           </PageTransition>
         </ThemeProvider>
         <Analytics />
