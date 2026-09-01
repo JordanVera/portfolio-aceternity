@@ -112,8 +112,14 @@ export default function About() {
             staying up to date with the latest industry trends. Recently, I have
             been immersing myself in the world of data visualization, MERN
             (MongoDB, Express.js, React.js, Node.js) development, and have even
-            ventured into the exciting realm of machine learning using
-            tensorflow.js.
+            ventured into the exciting realm of machine learning using{' '}
+            <Link
+              href="/projects/football-power-rankings"
+              className="text-accent hover:text-accent-hover"
+            >
+              tensorflow.js
+            </Link>
+            .
           </Paragraph>
 
           <Paragraph className="mt-4">
