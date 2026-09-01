@@ -255,7 +255,10 @@ export const ElectricBorder: React.FC<ElectricBorderProps> = ({
 
       if (distance <= accumulated + straightHeight) {
         const progress = (distance - accumulated) / straightHeight;
-        return { x: left, y: top + height - radius - progress * straightHeight };
+        return {
+          x: left,
+          y: top + height - radius - progress * straightHeight,
+        };
       }
       accumulated += straightHeight;
 
@@ -278,6 +281,7 @@ export const ElectricBorder: React.FC<ElectricBorderProps> = ({
         cancelAnimationFrame(animationRef.current);
         animationRef.current = null;
       }
+      lastFrameTimeRef.current = 0;
       return;
     }
 
@@ -316,6 +320,10 @@ export const ElectricBorder: React.FC<ElectricBorderProps> = ({
 
     const drawElectricBorder = (currentTime: number) => {
       if (!canvas || !ctx) return;
+
+      if (lastFrameTimeRef.current === 0) {
+        lastFrameTimeRef.current = currentTime;
+      }
 
       const deltaTime = (currentTime - lastFrameTimeRef.current) / 1000;
       timeRef.current += deltaTime * speed;
@@ -437,7 +445,7 @@ export const ElectricBorder: React.FC<ElectricBorderProps> = ({
   return (
     <div
       ref={containerRef}
-      className={twMerge('relative isolate overflow-hidden', className)}
+      className={twMerge('relative isolate overflow-visible', className)}
       style={
         {
           '--electric-border-color': borderColor,
