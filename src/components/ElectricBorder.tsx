@@ -437,7 +437,7 @@ export const ElectricBorder: React.FC<ElectricBorderProps> = ({
   return (
     <div
       ref={containerRef}
-      className={twMerge('relative isolate overflow-visible', className)}
+      className={twMerge('relative isolate overflow-hidden', className)}
       style={
         {
           '--electric-border-color': borderColor,
