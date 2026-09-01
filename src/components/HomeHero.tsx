@@ -50,7 +50,7 @@ const RotatingBuild = () => {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: '-100%', opacity: 0 }}
           transition={{ duration: 0.28, ease: 'easeOut' }}
-          className="whitespace-nowrap text-accent"
+          className="hero-build-rotating whitespace-nowrap text-accent"
         >
           {BUILDS[index]}
         </motion.span>
