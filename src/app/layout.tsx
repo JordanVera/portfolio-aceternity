@@ -35,7 +35,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark" data-theme="dark" suppressHydrationWarning>
+    <html lang="en" className="lsu" data-theme="lsu" suppressHydrationWarning>
       <body
         className={twMerge(
           inter.className,
