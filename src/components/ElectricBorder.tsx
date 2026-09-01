@@ -486,7 +486,9 @@ export const ElectricBorder: React.FC<ElectricBorderProps> = ({
           }}
         />
       </div>
-      <div className="relative rounded-[inherit]">{children}</div>
+      <div className="relative flex h-full flex-col rounded-[inherit]">
+        {children}
+      </div>
     </div>
   );
 };

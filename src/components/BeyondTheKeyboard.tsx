@@ -35,7 +35,7 @@ const interests = [
 
 export const BeyondTheKeyboard = () => {
   return (
-    <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
+    <div className="flex flex-col gap-6 sm:flex-row sm:items-stretch">
       {interests.map((interest, idx) => {
         const body = (
           <div className="flex h-full flex-col rounded-xl bg-surface-elevated/40 p-5 ring-1 ring-foreground/10">
@@ -57,14 +57,18 @@ export const BeyondTheKeyboard = () => {
         return (
           <motion.div
             key={interest.title}
+            className="flex min-w-0 flex-1 flex-col"
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-60px' }}
             transition={{ duration: 0.25, delay: idx * 0.06 }}
           >
-            <ElectricHover borderRadius={12} className="h-full rounded-xl">
+            <ElectricHover
+              borderRadius={12}
+              className="flex h-full flex-1 flex-col rounded-xl"
+            >
               {interest.href ? (
-                <Link href={interest.href} className="block h-full">
+                <Link href={interest.href} className="flex h-full flex-1 flex-col">
                   {body}
                 </Link>
               ) : (
