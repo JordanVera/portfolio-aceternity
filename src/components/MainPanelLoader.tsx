@@ -28,7 +28,7 @@ export function MainPanelLoader({ children }: { children: React.ReactNode }) {
     <MosaicLoadProvider containerRef={containerRef}>
       <div
         ref={containerRef}
-        className="js-main-panel relative flex min-h-0 flex-1 flex-col overflow-y-auto bg-surface lg:rounded-tl-xl"
+        className="js-main-panel relative flex min-h-0 min-w-0 flex-1 flex-col overflow-x-hidden overflow-y-auto bg-surface lg:rounded-tl-xl"
       >
         <Preloader />
         <MainPanelContent>{children}</MainPanelContent>
