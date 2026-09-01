@@ -27,7 +27,7 @@ export function Preloader() {
           onAnimationComplete={() => {
             if (complete) setMounted(false);
           }}
-          className="absolute inset-0 z-50 flex flex-col items-center justify-center gap-12 bg-surface"
+          className="max-h-screen absolute inset-0 z-50 flex flex-col items-center justify-center gap-12 bg-surface"
           role="status"
           aria-live="polite"
           aria-busy={!complete}

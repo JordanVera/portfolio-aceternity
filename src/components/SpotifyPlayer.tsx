@@ -1,6 +1,11 @@
 'use client';
 
 import {
+  preloadAudio,
+  useMosaicAsset,
+  useMosaicLoad,
+} from '@/components/MosaicLoadContext';
+import {
   IconPlayerPauseFilled,
   IconPlayerPlayFilled,
   IconVolume,
@@ -29,6 +34,7 @@ const formatTime = (seconds: number) => {
 };
 
 export const SpotifyPlayer = ({ track }: { track: SpotifyTrack }) => {
+  const { complete } = useMosaicLoad();
   const playerRef = useRef<HTMLDivElement>(null);
   const wavesurferRef = useRef<WaveSurfer | null>(null);
   const currentTimeRef = useRef<HTMLSpanElement>(null);
@@ -40,6 +46,10 @@ export const SpotifyPlayer = ({ track }: { track: SpotifyTrack }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [muted, setMuted] = useState(false);
   const [volume, setVolume] = useState(0.8);
+
+  const loadTrack = useCallback(() => preloadAudio(track.src), [track.src]);
+
+  useMosaicAsset(`audio:${track.src}`, loadTrack, !complete);
 
   volumeRef.current = volume;
   mutedRef.current = muted;
@@ -68,6 +78,8 @@ export const SpotifyPlayer = ({ track }: { track: SpotifyTrack }) => {
   }, []);
 
   const tryPlay = useCallback(async () => {
+    if (!complete) return;
+
     const wavesurfer = wavesurferRef.current;
     if (!wavesurfer || userPausedRef.current) return;
 
@@ -76,9 +88,11 @@ export const SpotifyPlayer = ({ track }: { track: SpotifyTrack }) => {
     } catch {
       setIsPlaying(false);
     }
-  }, []);
+  }, [complete]);
 
   useEffect(() => {
+    if (!complete) return;
+
     const unlock = () => {
       void tryPlay();
     };
@@ -90,7 +104,12 @@ export const SpotifyPlayer = ({ track }: { track: SpotifyTrack }) => {
       window.removeEventListener('pointerdown', unlock);
       window.removeEventListener('keydown', unlock);
     };
-  }, [tryPlay]);
+  }, [complete, tryPlay]);
+
+  useEffect(() => {
+    if (!complete) return;
+    void tryPlay();
+  }, [complete, tryPlay]);
 
   useEffect(() => {
     wavesurferRef.current?.setVolume(muted ? 0 : volume);
@@ -173,32 +192,39 @@ export const SpotifyPlayer = ({ track }: { track: SpotifyTrack }) => {
             0:00
           </span>
           <div className="h-9 min-w-0 flex-1">
-            <WavesurferPlayer
-              url={encodeURI(track.src)}
-              height={36}
-              barWidth={2}
-              barGap={2}
-              barRadius={2}
-              barMinHeight={1}
-              normalize
-              dragToSeek
-              hideScrollbar
-              waveColor="#4d4d4d"
-              progressColor="#1DB954"
-              cursorColor="#ffffff"
-              cursorWidth={1}
-              onReady={onReady}
-              onPlay={() => setIsPlaying(true)}
-              onPause={() => setIsPlaying(false)}
-              onTimeupdate={(_, time) => {
-                if (currentTimeRef.current) {
-                  currentTimeRef.current.textContent = formatTime(time);
-                }
-              }}
-              onFinish={(wavesurfer) => {
-                void wavesurfer.play();
-              }}
-            />
+            {complete ? (
+              <WavesurferPlayer
+                url={encodeURI(track.src)}
+                height={36}
+                barWidth={2}
+                barGap={2}
+                barRadius={2}
+                barMinHeight={1}
+                normalize
+                dragToSeek
+                hideScrollbar
+                waveColor="#4d4d4d"
+                progressColor="#1DB954"
+                cursorColor="#ffffff"
+                cursorWidth={1}
+                onReady={onReady}
+                onPlay={() => setIsPlaying(true)}
+                onPause={() => setIsPlaying(false)}
+                onTimeupdate={(_, time) => {
+                  if (currentTimeRef.current) {
+                    currentTimeRef.current.textContent = formatTime(time);
+                  }
+                }}
+                onFinish={(wavesurfer) => {
+                  void wavesurfer.play();
+                }}
+              />
+            ) : (
+              <div
+                className="h-full w-full rounded-sm bg-[#4d4d4d]/40"
+                aria-hidden
+              />
+            )}
           </div>
           <span
             ref={durationLabelRef}

@@ -10,7 +10,7 @@ import {
 } from '@tabler/icons-react';
 import { AnimatePresence, motion } from 'motion/react';
 import Image from 'next/image';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 export const TravelGallery = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -55,7 +55,6 @@ export const TravelGallery = () => {
             key={item.src}
             item={item}
             index={index}
-            paused={lightboxOpen}
             onOpen={() => setActiveIndex(index)}
           />
         ))}
@@ -78,12 +77,10 @@ export const TravelGallery = () => {
 const GalleryTile = ({
   item,
   index,
-  paused,
   onOpen,
 }: {
   item: TravelMedia;
   index: number;
-  paused: boolean;
   onOpen: () => void;
 }) => {
   return (
@@ -111,49 +108,22 @@ const GalleryTile = ({
             className="h-auto w-full rounded-md object-cover"
           />
         ) : (
-          <GridVideo src={item.src} paused={paused} />
+          <GridVideo src={item.src} />
         )}
       </motion.button>
     </ElectricHover>
   );
 };
 
-const GridVideo = ({ src, paused }: { src: string; paused: boolean }) => {
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    if (paused) {
-      video.pause();
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          void video.play();
-        } else {
-          video.pause();
-        }
-      },
-      { threshold: 0.4 },
-    );
-
-    observer.observe(video);
-    return () => observer.disconnect();
-  }, [paused, src]);
-
+const GridVideo = ({ src }: { src: string }) => {
   return (
     <div className="relative">
       <video
-        ref={videoRef}
         src={src}
         muted
-        loop
         playsInline
         preload="metadata"
+        data-mosaic-preload="metadata"
         className="pointer-events-none h-auto w-full rounded-md"
       />
       <span className="pointer-events-none absolute bottom-2 right-2 flex h-7 w-7 items-center justify-center rounded-full bg-background/70 text-foreground ring-1 ring-foreground/20">
@@ -238,6 +208,7 @@ const Lightbox = ({
             controls
             autoPlay
             playsInline
+            preload="auto"
             className="max-h-full max-w-full rounded-md"
           />
         )}
