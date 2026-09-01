@@ -6,6 +6,7 @@ import {
   createContext,
   useContext,
   useEffect,
+  useLayoutEffect,
   useRef,
   useState,
   type RefObject,
@@ -14,11 +15,13 @@ import {
 type MosaicLoadContextValue = {
   progress: number;
   complete: boolean;
+  loading: boolean;
 };
 
 const MosaicLoadContext = createContext<MosaicLoadContextValue>({
   progress: 100,
   complete: true,
+  loading: false,
 });
 
 export function useMosaicLoad() {
@@ -27,6 +30,7 @@ export function useMosaicLoad() {
 
 const MEDIA_SELECTOR = 'img, video, audio';
 const LOAD_TIMEOUT_MS = 12000;
+const MIN_DISPLAY_MS = 600;
 
 type MediaElement = HTMLImageElement | HTMLVideoElement | HTMLAudioElement;
 
@@ -121,34 +125,54 @@ export function MosaicLoadProvider({
   const reduceMotion = useReducedMotion();
   const [progress, setProgress] = useState(0);
   const [complete, setComplete] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const routeStartedAtRef = useRef(Date.now());
+
+  useLayoutEffect(() => {
+    routeStartedAtRef.current = Date.now();
+    setLoading(true);
+    setProgress(0);
+    setComplete(false);
+  }, [pathname]);
 
   useEffect(() => {
     const container = containerRef.current;
     const abort = new AbortController();
     const { signal } = abort;
 
-    const finish = () => {
+    const finish = async () => {
       if (signal.aborted) return;
+
+      const elapsed = Date.now() - routeStartedAtRef.current;
+      const remaining = MIN_DISPLAY_MS - elapsed;
+
+      if (remaining > 0) {
+        await new Promise((resolve) => setTimeout(resolve, remaining));
+      }
+
+      if (signal.aborted) return;
+
       setProgress(100);
       setComplete(true);
+      setLoading(false);
     };
 
-    const reset = () => {
-      setProgress(0);
-      setComplete(false);
-    };
-
-    if (!container || reduceMotion) {
-      reset();
-      finish();
+    if (!container) {
+      void finish();
       return () => abort.abort();
     }
 
-    reset();
+    if (reduceMotion) {
+      setProgress(100);
+      setComplete(true);
+      setLoading(false);
+      return () => abort.abort();
+    }
 
     let observer: MutationObserver | undefined;
     let pollId: ReturnType<typeof setInterval> | undefined;
     let maxWaitId: ReturnType<typeof setTimeout> | undefined;
+    let mediaReady = false;
 
     const tracked = new Set<MediaElement>();
     const pending = new Set<MediaElement>();
@@ -158,21 +182,31 @@ export function MosaicLoadProvider({
 
       const total = tracked.size;
       if (total === 0) {
-        setProgress(100);
+        setProgress((current) => (current === 0 ? 12 : current));
         return;
       }
 
       const loaded = total - pending.size;
-      setProgress(Math.min(100, Math.round((loaded / total) * 100)));
+      const next = Math.min(99, Math.round((loaded / total) * 100));
+      setProgress((current) => Math.max(current, next));
+    };
+
+    const tryFinish = () => {
+      if (signal.aborted || !mediaReady) return;
+
+      observer?.disconnect();
+      if (pollId) clearInterval(pollId);
+      if (maxWaitId) clearTimeout(maxWaitId);
+      void finish();
     };
 
     const checkDone = () => {
       if (signal.aborted) return;
-      if (tracked.size > 0 && pending.size === 0) {
-        observer?.disconnect();
-        if (pollId) clearInterval(pollId);
-        if (maxWaitId) clearTimeout(maxWaitId);
-        finish();
+
+      if (tracked.size === 0 || pending.size === 0) {
+        mediaReady = true;
+        setProgress((current) => Math.max(current, 99));
+        tryFinish();
       }
     };
 
@@ -208,16 +242,6 @@ export function MosaicLoadProvider({
     const start = () => {
       scan();
 
-      if (tracked.size === 0) {
-        finish();
-        return;
-      }
-
-      if (pending.size === 0) {
-        finish();
-        return;
-      }
-
       observer = new MutationObserver(scan);
       observer.observe(container, { childList: true, subtree: true });
 
@@ -229,7 +253,10 @@ export function MosaicLoadProvider({
         checkDone();
       }, 200);
 
-      maxWaitId = setTimeout(finish, LOAD_TIMEOUT_MS);
+      maxWaitId = setTimeout(() => {
+        mediaReady = true;
+        tryFinish();
+      }, LOAD_TIMEOUT_MS);
     };
 
     const frameId = requestAnimationFrame(() => {
@@ -246,7 +273,7 @@ export function MosaicLoadProvider({
   }, [pathname, containerRef, reduceMotion]);
 
   return (
-    <MosaicLoadContext.Provider value={{ progress, complete }}>
+    <MosaicLoadContext.Provider value={{ progress, complete, loading }}>
       {children}
     </MosaicLoadContext.Provider>
   );

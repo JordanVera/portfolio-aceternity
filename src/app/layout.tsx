@@ -49,12 +49,14 @@ export default function RootLayout({
         />
         <ThemeProvider>
           <Sidebar />
-          <PageTransition>
+          <div className="flex min-h-0 flex-1 flex-col overflow-y-auto bg-background lg:pl-2 lg:pt-2">
             <MainPanelLoader>
-              <div className="flex-1">{children}</div>
-              <Footer />
+              <PageTransition>
+                <div className="flex-1">{children}</div>
+                <Footer />
+              </PageTransition>
             </MainPanelLoader>
-          </PageTransition>
+          </div>
         </ThemeProvider>
         <Analytics />
         <SpeedInsights />

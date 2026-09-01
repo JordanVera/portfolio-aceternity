@@ -6,18 +6,18 @@ import { AnimatePresence, motion } from 'motion/react';
 import { useEffect, useState } from 'react';
 
 export function Preloader() {
-  const { progress, complete } = useMosaicLoad();
-  const [visible, setVisible] = useState(true);
+  const { progress, complete, loading } = useMosaicLoad();
+  const [mounted, setMounted] = useState(loading);
 
   useEffect(() => {
-    if (!complete) {
-      setVisible(true);
+    if (loading) {
+      setMounted(true);
     }
-  }, [complete]);
+  }, [loading]);
 
   return (
     <AnimatePresence>
-      {true && (
+      {mounted && (
         <motion.div
           data-mosaic-ignore
           initial={{ opacity: 1 }}
@@ -25,7 +25,7 @@ export function Preloader() {
           exit={{ opacity: 0 }}
           transition={{ duration: complete ? 0.35 : 0, ease: 'easeOut' }}
           onAnimationComplete={() => {
-            if (complete) setVisible(false);
+            if (complete) setMounted(false);
           }}
           className="absolute inset-0 z-50 flex flex-col items-center justify-center gap-12 bg-surface"
           role="status"
