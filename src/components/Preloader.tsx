@@ -35,7 +35,10 @@ export function Preloader() {
         >
           <div className="preloader-logo-stage">
             <div className="preloader-logo">
-              <JordanVeraLogo className="h-[min(42vw,8rem)]" priority />
+              <JordanVeraLogo
+                className="h-[min(42vw,4rem)] animate-pulse"
+                priority
+              />
             </div>
           </div>
           <div className="flex w-[min(60vw,16rem)] flex-col items-center gap-3">
