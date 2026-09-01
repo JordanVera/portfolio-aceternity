@@ -62,7 +62,7 @@ export const Sidebar = () => {
               animate={{ x: 0 }}
               transition={{ duration: 0.2, ease: 'linear' }}
               exit={{ x: -200 }}
-              className="px-6 bg-background z-[100] py-10  max-w-[14rem] lg:w-fit  fixed lg:relative  h-screen left-0 flex flex-col justify-between"
+              className="px-6 bg-background z-[100] pt-6  max-w-[14rem] lg:w-fit  fixed lg:relative  h-screen left-0 flex flex-col justify-between"
             >
               <div className="flex-1 overflow-auto">
                 <SidebarHeader />
@@ -71,32 +71,6 @@ export const Sidebar = () => {
               <div>
                 <div onClick={(event) => event.stopPropagation()}>
                   <ThemeSwitcher />
-                </div>
-                <div onClick={() => isMobile() && setOpen(false)}>
-                  <HoverBorderGradient
-                    as={Link}
-                    href="/resume"
-                    containerClassName="rounded-full"
-                    className="bg-background text-foreground flex items-center space-x-2"
-                  >
-                    <svg
-                      width="66"
-                      height="65"
-                      viewBox="0 0 66 65"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-3 w-3 text-foreground"
-                    >
-                      <path
-                        d="M8 8.05571C8 8.05571 54.9009 18.1782 57.8687 30.062C60.8365 41.9458 9.05432 57.4696 9.05432 57.4696"
-                        stroke="currentColor"
-                        strokeWidth="15"
-                        strokeMiterlimit="3.86874"
-                        strokeLinecap="round"
-                      />
-                    </svg>
-                    <span>Read Resume</span>
-                  </HoverBorderGradient>
                 </div>
               </div>
             </motion.div>
