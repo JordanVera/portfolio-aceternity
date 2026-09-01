@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: 'Projects',
     description:
-      'Web apps and products by Jordan Vera, including Legendary Barber Competition, Exterior Pro Stack, NFL Last Longer, and more.',
+      'Web apps and products by Jordan Vera, including Legendary Barber Competition, Exterior Pro Stack, Football Power Rankings, and more.',
     icons: {
       icon: '/images/logoWhite.svg',
     },

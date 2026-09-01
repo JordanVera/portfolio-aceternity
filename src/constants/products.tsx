@@ -6,6 +6,7 @@ import countries from 'public/images/projects/countries.png';
 import pomodoro from 'public/images/projects/pomodoro.png';
 import exteriorProStack from 'public/images/projects/exterior-pro-stack.png';
 import legendaryBarber from 'public/images/projects/legendary-barber.png';
+import nflRankings from 'public/images/projects/nfl-rankings.png';
 
 export const products = [
   {
@@ -67,6 +68,47 @@ export const products = [
           Twilio for SMS updates. That stack supports bidding, subscriptions,
           crew dispatch, before-and-after photo proof, and an admin dashboard
           without splitting the business across disconnected codebases.
+        </p>
+      </div>
+    ),
+  },
+  {
+    href: 'https://nfl-rankings-rose.vercel.app/',
+    title: 'Football Power Rankings',
+    description:
+      'Train a TensorFlow.js model on ESPN box scores and rank the NFL or FBS against FPI and the AP poll.',
+    thumbnail: nflRankings,
+    images: [nflRankings, nflRankings],
+    stack: ['Nextjs', 'TensorFlow.js', 'Tailwindcss'],
+    slug: 'football-power-rankings',
+    content: (
+      <div className="text-foreground">
+        <p>
+          Football Power Rankings is a Next.js ranking engine that pulls every
+          regular-season ESPN box score for a league and year, fits a small
+          dense network on standardized point differential, and returns a power
+          ranking you can read against ESPN. Pick NFL or FBS, pick a season back
+          to 2000, and the server trains a 25-dimensional multilayer perceptron
+          in TensorFlow.js — then lines our list up next to ESPN FPI (NFL) or
+          the AP Top 25 (college).
+        </p>
+        <p>
+          The model is not a black box. Each team-game becomes a 25-D vector of
+          yards, efficiency, returns, turnovers, and clock — everything except
+          the score — then a 25→128→64→32→1 ReLU network predicts margin. NFL
+          ranks by mean predicted differential; FBS adds a Simple Rating System
+          so a blowout over a cupcake is not the same as a blowout over a
+          contender. Live seasons shrink toward last year until enough games
+          have been played. Try it at{' '}
+          <a
+            href="https://nfl-rankings-rose.vercel.app/"
+            target="_blank"
+            rel="noreferrer"
+            className="text-accent underline underline-offset-2 hover:text-accent-hover"
+          >
+            nfl-rankings-rose.vercel.app
+          </a>
+          .
         </p>
       </div>
     ),
