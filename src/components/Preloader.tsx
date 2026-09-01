@@ -17,7 +17,7 @@ export function Preloader() {
 
   return (
     <AnimatePresence>
-      {visible && (
+      {true && (
         <motion.div
           data-mosaic-ignore
           initial={{ opacity: 1 }}

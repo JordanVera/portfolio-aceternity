@@ -37,9 +37,7 @@ export function ThemeSwitcher() {
               selected
                 ? 'bg-muted text-foreground shadow-sm'
                 : 'text-foreground-subtle hover:text-foreground',
-              option.id === 'lsu' &&
-                selected &&
-                'bg-[#461D7C] text-[#FDD023]',
+              option.id === 'lsu' && selected && ' bg-[#FDD023] text-[#461D7C]',
             )}
           >
             {option.id === 'dark' && <IconMoon className="h-3.5 w-3.5" />}
