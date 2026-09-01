@@ -62,8 +62,8 @@ html[data-theme='lsu'] {
   --surface-elevated: 70 29 124;
   --muted: 92 45 153;
   --foreground: 255 255 255;
-  --foreground-muted: 245 230 200;
-  --foreground-subtle: 212 196 138;
+  --foreground-muted: 255 255 255;
+  --foreground-subtle: 228 228 231;
   --accent: 253 208 35;
   --accent-hover: 255 229 102;
   --accent-strong: 253 208 35;
@@ -71,8 +71,8 @@ html[data-theme='lsu'] {
   --cta-from: 253 208 35;
   --cta-to: 230 184 0;
   --cta-fg: 70 29 124;
-  --heading-from: 253 208 35;
-  --heading-to: 255 244 184;
+  --heading-from: 255 255 255;
+  --heading-to: 255 255 255;
   --border: 92 45 153;
   --input: 70 29 124;
   --input-ring: 253 208 35;
@@ -96,6 +96,11 @@ html[data-theme='dark'] .jordan-vera-logo-white,
 html[data-theme='light'] .jordan-vera-logo-black,
 html[data-theme='lsu'] .jordan-vera-logo-gold {
   display: block;
+}
+
+html[data-theme='lsu'] .hero-build-rotating {
+  color: rgb(var(--accent));
+  -webkit-text-fill-color: rgb(var(--accent));
 }
 
 html[data-theme='light'] .skyline-art {
