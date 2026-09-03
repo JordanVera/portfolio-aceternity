@@ -45,10 +45,10 @@ export default function Home() {
       <div className="h-[calc(72px+env(safe-area-inset-bottom))]" aria-hidden />
       <SpotifyPlayer
         track={{
-          title: 'Aruarian Dance',
-          artist: 'Nujabes',
-          src: '/music/Nujabes - Aruarian Dance (Samurai Champloo OST) . Track 03.mp3',
-          cover: 'aruarian',
+          title: 'Call Me',
+          artist: 'Onlyfriends',
+          src: '/music/Onlyfriends - Call Me.mp3',
+          cover: 'callme',
         }}
       />
     </>

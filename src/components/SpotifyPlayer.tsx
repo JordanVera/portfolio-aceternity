@@ -23,7 +23,7 @@ export type SpotifyTrack = {
   title: string;
   artist: string;
   src: string;
-  cover?: 'ghost' | 'riot' | 'dancin' | 'aruarian';
+  cover?: 'ghost' | 'riot' | 'dancin' | 'aruarian' | 'callme';
 };
 
 const formatTime = (seconds: number) => {
@@ -277,7 +277,7 @@ export const SpotifyPlayer = ({ track }: { track: SpotifyTrack }) => {
 const AlbumArt = ({
   variant,
 }: {
-  variant: 'ghost' | 'riot' | 'dancin' | 'aruarian';
+  variant: 'ghost' | 'riot' | 'dancin' | 'aruarian' | 'callme';
 }) => {
   const gradientId = `album-sky-${useId().replace(/:/g, '')}`;
 
@@ -286,7 +286,29 @@ const AlbumArt = ({
       className="relative h-12 w-12 shrink-0 overflow-hidden rounded-sm shadow-lg ring-1 ring-white/10"
       aria-hidden
     >
-      {variant === 'riot' ? (
+      {variant === 'callme' ? (
+        <svg viewBox="0 0 64 64" className="h-full w-full">
+          <defs>
+            <radialGradient id={gradientId} cx="50%" cy="75%" r="80%">
+              <stop offset="0%" stopColor="#0e7490" />
+              <stop offset="55%" stopColor="#164e63" />
+              <stop offset="100%" stopColor="#09090b" />
+            </radialGradient>
+          </defs>
+          <rect width="64" height="64" fill={`url(#${gradientId})`} />
+          <rect
+            x="22"
+            y="12"
+            width="20"
+            height="36"
+            rx="10"
+            fill="#22d3ee"
+            opacity="0.9"
+          />
+          <rect x="26" y="16" width="12" height="24" rx="2" fill="#083344" />
+          <circle cx="32" cy="44" r="2" fill="#083344" />
+        </svg>
+      ) : variant === 'riot' ? (
         <svg viewBox="0 0 64 64" className="h-full w-full">
           <defs>
             <radialGradient id={gradientId} cx="50%" cy="80%" r="80%">
@@ -344,10 +366,7 @@ const AlbumArt = ({
           <rect width="64" height="64" fill={`url(#${gradientId})`} />
           <circle cx="32" cy="26" r="14" fill="#ea580c" />
           <circle cx="32" cy="26" r="8" fill="#fb923c" />
-          <path
-            d="M0 50 Q16 40 32 48 T64 44 L64 64 L0 64 Z"
-            fill="#1c1917"
-          />
+          <path d="M0 50 Q16 40 32 48 T64 44 L64 64 L0 64 Z" fill="#1c1917" />
         </svg>
       ) : (
         <svg viewBox="0 0 64 64" className="h-full w-full">
