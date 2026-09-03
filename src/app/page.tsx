@@ -106,8 +106,8 @@ export default function Home() {
               Let&apos;s build something
             </Heading>
             <Paragraph className="mt-3 max-w-xl">
-              Have a project, a role, or just want to say hi? I read everything
-              that lands in my inbox. Reach me at{' '}
+              Have a project in mind? Tell me what you are building and I will
+              get back to you with next steps. Reach me at{' '}
               <a
                 href={`mailto:${CONTACT_EMAIL}`}
                 className="text-accent underline underline-offset-2 hover:text-accent-hover"
@@ -119,7 +119,7 @@ export default function Home() {
             <div className="mt-6 flex flex-wrap items-center gap-4">
               <Link href="/contact" className={ctaClass}>
                 <IconMail className="h-4 w-4" />
-                Send a message
+                Start a project
               </Link>
               <Link href="/resume" className={ctaClass}>
                 <IconScript className="h-4 w-4" />

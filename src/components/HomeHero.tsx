@@ -73,7 +73,7 @@ export const HomeHero = () => {
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
             <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
           </span>
-          Open to new projects and roles
+          Open to new projects
         </motion.span>
 
         {/* <span className="mt-4 block text-4xl">👋</span> */}
@@ -143,7 +143,7 @@ export const HomeHero = () => {
           <ElectricHover borderRadius={6} className="rounded-md">
             <Link href="/contact" className={ctaClass}>
               <IconMail className="h-4 w-4" />
-              Contact
+              Hire me
             </Link>
           </ElectricHover>
           <ElectricHover borderRadius={6} className="rounded-md">

@@ -11,21 +11,44 @@ import {
 const CONTACT_EMAIL = 'verawebdev@protonmail.com';
 const FORMSUBMIT_URL = `https://formsubmit.co/ajax/${CONTACT_EMAIL}`;
 
+const PROJECT_TYPES = [
+  'Website',
+  'Web app',
+  'Native app',
+  'API',
+  'Brand',
+  'Something else',
+] as const;
+
+const TIMELINES = [
+  'ASAP',
+  '1–3 months',
+  '3–6 months',
+  'Just exploring',
+] as const;
+
+const BUDGETS = [
+  'Under $1k',
+  '$1–5k',
+  '$5–10k',
+  '$10k+',
+  'Not sure yet',
+] as const;
+
+const fieldClass =
+  'bg-input focus:outline-none focus:ring-2 focus:ring-input-ring px-2 py-2 rounded-md text-sm text-input-fg w-full placeholder:text-foreground-subtle';
+
 const defaultFormState = {
-  name: {
-    value: '',
-    error: '',
-  },
-  email: {
-    value: '',
-    error: '',
-  },
-  message: {
-    value: '',
-    error: '',
-  },
+  name: { value: '', error: '' },
+  email: { value: '', error: '' },
+  company: { value: '', error: '' },
+  projectType: { value: '', error: '' },
+  timeline: { value: '', error: '' },
+  budget: { value: '', error: '' },
+  message: { value: '', error: '' },
 };
 
+type FormField = keyof typeof defaultFormState;
 type Status = 'idle' | 'submitting';
 type ToastState = {
   type: 'success' | 'error';
@@ -43,13 +66,26 @@ export const Contact = () => {
   const isComplete =
     formData.name.value.trim().length > 0 &&
     isValidEmail(formData.email.value) &&
+    formData.projectType.value.length > 0 &&
+    formData.timeline.value.length > 0 &&
+    formData.budget.value.length > 0 &&
     formData.message.value.trim().length > 0;
+
+  const updateField = (field: FormField, value: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      [field]: { value, error: '' },
+    }));
+  };
 
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (status === 'submitting' || !isComplete) return;
 
     setStatus('submitting');
+
+    const name = formData.name.value.trim();
+    const projectType = formData.projectType.value;
 
     try {
       const response = await fetch(FORMSUBMIT_URL, {
@@ -59,10 +95,14 @@ export const Contact = () => {
           Accept: 'application/json',
         },
         body: JSON.stringify({
-          name: formData.name.value.trim(),
+          name,
           email: formData.email.value.trim(),
-          message: formData.message.value.trim(),
-          _subject: `Portfolio contact from ${formData.name.value.trim()}`,
+          company: formData.company.value.trim() || '—',
+          'Project type': projectType,
+          Timeline: formData.timeline.value,
+          Budget: formData.budget.value,
+          Brief: formData.message.value.trim(),
+          _subject: `Hire inquiry from ${name} — ${projectType}`,
           _template: 'table',
           _captcha: 'false',
         }),
@@ -80,7 +120,7 @@ export const Contact = () => {
 
       setToast({
         type: 'success',
-        message: "Thanks — I'll get back to you ASAP.",
+        message: "Thanks — I'll reply about this project ASAP.",
       });
       setFormData(defaultFormState);
     } catch {
@@ -108,56 +148,99 @@ export const Contact = () => {
           <input
             type="text"
             name="name"
-            placeholder="Your Name"
+            placeholder="Your name"
             autoComplete="name"
-            className="bg-input focus:outline-none focus:ring-2 focus:ring-input-ring px-2 py-2 rounded-md text-sm text-input-fg w-full placeholder:text-foreground-subtle"
+            aria-label="Your name"
+            className={fieldClass}
             value={formData.name.value}
-            onChange={(e) => {
-              setFormData({
-                ...formData,
-                name: {
-                  value: e.target.value,
-                  error: '',
-                },
-              });
-            }}
+            onChange={(e) => updateField('name', e.target.value)}
           />
           <input
             type="email"
             name="email"
             placeholder="Your email address"
             autoComplete="email"
-            className="bg-input focus:outline-none focus:ring-2 focus:ring-input-ring px-2 py-2 rounded-md text-sm text-input-fg w-full placeholder:text-foreground-subtle"
+            aria-label="Your email address"
+            className={fieldClass}
             value={formData.email.value}
-            onChange={(e) => {
-              setFormData({
-                ...formData,
-                email: {
-                  value: e.target.value,
-                  error: '',
-                },
-              });
-            }}
+            onChange={(e) => updateField('email', e.target.value)}
           />
         </div>
-        <div>
-          <textarea
-            name="message"
-            placeholder="Your Message"
-            rows={10}
-            className="bg-input focus:outline-none focus:ring-2 focus:ring-input-ring px-2 mt-4 py-2 rounded-md text-sm text-input-fg w-full placeholder:text-foreground-subtle"
-            value={formData.message.value}
-            onChange={(e) => {
-              setFormData({
-                ...formData,
-                message: {
-                  value: e.target.value,
-                  error: '',
-                },
-              });
-            }}
-          />
+        <input
+          type="text"
+          name="company"
+          placeholder="Company or project name (optional)"
+          autoComplete="organization"
+          aria-label="Company or project name"
+          className={`${fieldClass} mt-4`}
+          value={formData.company.value}
+          onChange={(e) => updateField('company', e.target.value)}
+        />
+        <div className="mt-4 flex flex-col gap-4 md:flex-row md:gap-5">
+          <select
+            name="projectType"
+            aria-label="Project type"
+            className={`${fieldClass} ${
+              formData.projectType.value ? '' : 'text-foreground-subtle'
+            }`}
+            value={formData.projectType.value}
+            onChange={(e) => updateField('projectType', e.target.value)}
+          >
+            <option value="" disabled>
+              Project type
+            </option>
+            {PROJECT_TYPES.map((type) => (
+              <option key={type} value={type}>
+                {type}
+              </option>
+            ))}
+          </select>
+          <select
+            name="timeline"
+            aria-label="Timeline"
+            className={`${fieldClass} ${
+              formData.timeline.value ? '' : 'text-foreground-subtle'
+            }`}
+            value={formData.timeline.value}
+            onChange={(e) => updateField('timeline', e.target.value)}
+          >
+            <option value="" disabled>
+              Timeline
+            </option>
+            {TIMELINES.map((timeline) => (
+              <option key={timeline} value={timeline}>
+                {timeline}
+              </option>
+            ))}
+          </select>
+          <select
+            name="budget"
+            aria-label="Budget"
+            className={`${fieldClass} ${
+              formData.budget.value ? '' : 'text-foreground-subtle'
+            }`}
+            value={formData.budget.value}
+            onChange={(e) => updateField('budget', e.target.value)}
+          >
+            <option value="" disabled>
+              Budget
+            </option>
+            {BUDGETS.map((budget) => (
+              <option key={budget} value={budget}>
+                {budget}
+              </option>
+            ))}
+          </select>
         </div>
+        <textarea
+          name="message"
+          placeholder="What are you building? Goals, scope, and anything else I should know."
+          aria-label="Project brief"
+          rows={8}
+          className={`${fieldClass} mt-4`}
+          value={formData.message.value}
+          onChange={(e) => updateField('message', e.target.value)}
+        />
 
         <ElectricHover
           borderRadius={6}
@@ -169,7 +252,7 @@ export const Contact = () => {
             type="submit"
             disabled={!isComplete || status === 'submitting'}
           >
-            {status === 'submitting' ? 'Sending...' : 'Submit'}
+            {status === 'submitting' ? 'Sending...' : 'Send inquiry'}
           </button>
         </ElectricHover>
       </form>
