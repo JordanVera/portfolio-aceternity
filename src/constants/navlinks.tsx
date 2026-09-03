@@ -40,7 +40,7 @@ export const navlinks = [
   //   icon: IconArticle,
   // },
   {
-    href: '/contact',
+    href: '/hire',
     label: 'Hire me',
     icon: IconMail,
   },
