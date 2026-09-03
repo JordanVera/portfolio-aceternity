@@ -1,35 +1,34 @@
 import { Contact } from '@/components/Contact';
 import { Container } from '@/components/Container';
 import { Heading } from '@/components/Heading';
-import { Highlight } from '@/components/Highlight';
 import { Paragraph } from '@/components/Paragraph';
-import { Products } from '@/components/Products';
 import { Metadata } from 'next';
-import Image from 'next/image';
 
 export const metadata: Metadata = {
-  title: 'Contact',
+  title: 'Hire me',
   description:
-    'Get in touch with Jordan Vera about a project, a role, or a collaboration. Email verawebdev@protonmail.com.',
+    'Hire Jordan Vera for a freelance web, native, or API project. Tell me what you are building, or email verawebdev@protonmail.com.',
   icons: {
     icon: '/images/logoWhite.svg',
   },
 };
 
-export default function Projects() {
+export default function HirePage() {
   return (
     <Container>
       <span className="text-4xl">✉️</span>
-      <Heading className="font-black mb-2">Contact Me</Heading>
+      <Heading className="font-black mb-2">Hire Me</Heading>
       <Paragraph className="mb-10 max-w-xl">
-        Reach out over email at{' '}
+        Tell me about the project — what you are building, when you need it, and
+        the budget you have in mind. I will reply with next steps. Prefer email?
+        Reach me at{' '}
         <a
           href="mailto:verawebdev@protonmail.com"
           className="text-accent hover:text-accent-hover underline underline-offset-2"
         >
           verawebdev@protonmail.com
-        </a>{' '}
-        or fill out this form. I will get back to you ASAP — I promise.
+        </a>
+        .
       </Paragraph>
       <Contact />
     </Container>

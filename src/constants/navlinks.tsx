@@ -41,7 +41,7 @@ export const navlinks = [
   // },
   {
     href: '/contact',
-    label: 'Contact',
+    label: 'Hire me',
     icon: IconMail,
   },
 ];
