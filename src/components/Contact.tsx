@@ -1,10 +1,12 @@
 'use client';
 import { ElectricHover } from '@/components/ElectricBorder';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import {
   IconCircleCheckFilled,
   IconExclamationCircle,
+  IconFile,
+  IconPaperclip,
   IconX,
 } from '@tabler/icons-react';
 
@@ -35,8 +37,81 @@ const BUDGETS = [
   'Not sure yet',
 ] as const;
 
+const MAX_FILES = 5;
+const MAX_TOTAL_BYTES = 10 * 1024 * 1024;
+const ACCEPT_ATTR =
+  'image/png,image/jpeg,image/webp,image/gif,image/svg+xml,application/pdf';
+const ALLOWED_TYPES = new Set([
+  'image/png',
+  'image/jpeg',
+  'image/webp',
+  'image/gif',
+  'image/svg+xml',
+  'application/pdf',
+]);
+const ALLOWED_EXTENSIONS = /\.(png|jpe?g|webp|gif|svg|pdf)$/i;
+
 const fieldClass =
   'bg-input focus:outline-none focus:ring-2 focus:ring-input-ring px-2 py-2 rounded-md text-sm text-input-fg w-full placeholder:text-foreground-subtle';
+
+type Attachment = {
+  id: string;
+  file: File;
+  previewUrl: string | null;
+};
+
+const isAllowedFile = (file: File) =>
+  ALLOWED_TYPES.has(file.type) || ALLOWED_EXTENSIONS.test(file.name);
+
+const formatBytes = (bytes: number) => {
+  if (bytes < 1024) return `${bytes} B`;
+  if (bytes < 1024 * 1024) return `${Math.round(bytes / 1024)} KB`;
+  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+};
+
+const revokePreviews = (items: Attachment[]) => {
+  items.forEach((item) => {
+    if (item.previewUrl) URL.revokeObjectURL(item.previewUrl);
+  });
+};
+
+const mergeAttachments = (prev: Attachment[], incoming: File[]) => {
+  const next = [...prev];
+  let error = '';
+
+  for (const file of incoming) {
+    if (!isAllowedFile(file)) {
+      error = `${file.name} is not a supported type. Use PNG, JPG, SVG, WebP, GIF, or PDF.`;
+      continue;
+    }
+
+    const duplicate = next.some(
+      (item) => item.file.name === file.name && item.file.size === file.size,
+    );
+    if (duplicate) continue;
+
+    if (next.length >= MAX_FILES) {
+      error = `You can attach up to ${MAX_FILES} files.`;
+      break;
+    }
+
+    const total = next.reduce((sum, item) => sum + item.file.size, 0) + file.size;
+    if (total > MAX_TOTAL_BYTES) {
+      error = 'Attachments must stay under 10MB total.';
+      continue;
+    }
+
+    next.push({
+      id: `${file.name}-${file.size}-${file.lastModified}-${next.length}`,
+      file,
+      previewUrl: file.type.startsWith('image/')
+        ? URL.createObjectURL(file)
+        : null,
+    });
+  }
+
+  return { next, error };
+};
 
 const defaultFormState = {
   name: { value: '', error: '' },
@@ -60,8 +135,18 @@ const isValidEmail = (value: string) =>
 
 export const Contact = () => {
   const [formData, setFormData] = useState(defaultFormState);
+  const [attachments, setAttachments] = useState<Attachment[]>([]);
+  const [attachmentError, setAttachmentError] = useState('');
+  const [isDragging, setIsDragging] = useState(false);
   const [status, setStatus] = useState<Status>('idle');
   const [toast, setToast] = useState<ToastState>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const attachmentsRef = useRef(attachments);
+  attachmentsRef.current = attachments;
+
+  useEffect(() => {
+    return () => revokePreviews(attachmentsRef.current);
+  }, []);
 
   const isComplete =
     formData.name.value.trim().length > 0 &&
@@ -78,6 +163,28 @@ export const Contact = () => {
     }));
   };
 
+  const addFiles = (incoming: FileList | File[]) => {
+    const { next, error } = mergeAttachments(attachments, Array.from(incoming));
+    setAttachments(next);
+    setAttachmentError(error);
+  };
+
+  const removeAttachment = (id: string) => {
+    setAttachments((prev) => {
+      const removed = prev.find((item) => item.id === id);
+      if (removed?.previewUrl) URL.revokeObjectURL(removed.previewUrl);
+      return prev.filter((item) => item.id !== id);
+    });
+    setAttachmentError('');
+  };
+
+  const resetAttachments = () => {
+    revokePreviews(attachments);
+    setAttachments([]);
+    setAttachmentError('');
+    if (fileInputRef.current) fileInputRef.current.value = '';
+  };
+
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (status === 'submitting' || !isComplete) return;
@@ -86,26 +193,38 @@ export const Contact = () => {
 
     const name = formData.name.value.trim();
     const projectType = formData.projectType.value;
+    const payload = new FormData();
+    const honey = (
+      e.currentTarget.elements.namedItem('_honey') as HTMLInputElement | null
+    )?.value;
+
+    payload.append('name', name);
+    payload.append('email', formData.email.value.trim());
+    payload.append('company', formData.company.value.trim() || '—');
+    payload.append('Project type', projectType);
+    payload.append('Timeline', formData.timeline.value);
+    payload.append('Budget', formData.budget.value);
+    payload.append('Brief', formData.message.value.trim());
+    payload.append(
+      'Attachments',
+      attachments.map((item) => item.file.name).join(', ') || 'None',
+    );
+    payload.append('_subject', `Hire inquiry from ${name} — ${projectType}`);
+    payload.append('_template', 'table');
+    payload.append('_captcha', 'false');
+    if (honey) payload.append('_honey', honey);
+
+    attachments.forEach((item, index) => {
+      payload.append(`attachment ${index + 1}`, item.file, item.file.name);
+    });
 
     try {
       const response = await fetch(FORMSUBMIT_URL, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
           Accept: 'application/json',
         },
-        body: JSON.stringify({
-          name,
-          email: formData.email.value.trim(),
-          company: formData.company.value.trim() || '—',
-          'Project type': projectType,
-          Timeline: formData.timeline.value,
-          Budget: formData.budget.value,
-          Brief: formData.message.value.trim(),
-          _subject: `Hire inquiry from ${name} — ${projectType}`,
-          _template: 'table',
-          _captcha: 'false',
-        }),
+        body: payload,
       });
 
       const data = await response.json().catch(() => null);
@@ -123,6 +242,7 @@ export const Contact = () => {
         message: "Thanks — I'll reply about this project ASAP.",
       });
       setFormData(defaultFormState);
+      resetAttachments();
     } catch {
       setToast({
         type: 'error',
@@ -135,7 +255,12 @@ export const Contact = () => {
 
   return (
     <>
-      <form id="contactform" onSubmit={handleFormSubmit} noValidate>
+      <form
+        id="contactform"
+        onSubmit={handleFormSubmit}
+        noValidate
+        encType="multipart/form-data"
+      >
         <input
           type="text"
           name="_honey"
@@ -241,6 +366,93 @@ export const Contact = () => {
           value={formData.message.value}
           onChange={(e) => updateField('message', e.target.value)}
         />
+
+        <div
+          onDragOver={(e) => {
+            e.preventDefault();
+            setIsDragging(true);
+          }}
+          onDragLeave={(e) => {
+            if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+              setIsDragging(false);
+            }
+          }}
+          onDrop={(e) => {
+            e.preventDefault();
+            setIsDragging(false);
+            addFiles(e.dataTransfer.files);
+          }}
+          className={`mt-4 rounded-md border border-dashed bg-input px-3 py-4 transition-colors ${
+            isDragging
+              ? 'border-accent'
+              : 'border-foreground/15 hover:border-foreground/30'
+          }`}
+        >
+          <label className="flex cursor-pointer flex-col items-center gap-1 text-center">
+            <IconPaperclip className="h-5 w-5 text-foreground-subtle" />
+            <span className="text-sm text-input-fg">
+              Attach logos or references
+            </span>
+            <span className="text-xs text-foreground-subtle">
+              Optional. PNG, JPG, SVG, WebP, GIF, or PDF — up to 5 files, 10MB
+              total.
+            </span>
+            <input
+              ref={fileInputRef}
+              type="file"
+              name="attachment"
+              multiple
+              accept={ACCEPT_ATTR}
+              aria-label="Attach logos or references"
+              className="sr-only"
+              onChange={(e) => {
+                if (e.target.files) addFiles(e.target.files);
+                e.target.value = '';
+              }}
+            />
+          </label>
+        </div>
+        {attachmentError ? (
+          <p className="mt-2 text-sm text-rose-400">{attachmentError}</p>
+        ) : null}
+        {attachments.length > 0 ? (
+          <ul className="mt-3 space-y-2">
+            {attachments.map((item) => (
+              <li
+                key={item.id}
+                className="flex items-center gap-3 rounded-md bg-input px-2 py-2"
+              >
+                {item.previewUrl ? (
+                  // blob: URLs from the local file picker
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={item.previewUrl}
+                    alt=""
+                    className="h-10 w-10 flex-shrink-0 rounded object-cover"
+                  />
+                ) : (
+                  <IconFile className="h-5 w-5 flex-shrink-0 text-foreground-subtle" />
+                )}
+                <div className="min-w-0 flex-1">
+                  <p className="truncate text-sm text-input-fg">
+                    {item.file.name}
+                  </p>
+                  <p className="text-xs text-foreground-subtle">
+                    {formatBytes(item.file.size)}
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => removeAttachment(item.id)}
+                  aria-label={`Remove ${item.file.name}`}
+                  className="rounded p-1 text-foreground-subtle hover:text-foreground"
+                >
+                  <IconX className="h-4 w-4" />
+                </button>
+              </li>
+            ))}
+          </ul>
+        ) : null}
 
         <ElectricHover
           borderRadius={6}
